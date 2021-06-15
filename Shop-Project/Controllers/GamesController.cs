@@ -25,6 +25,25 @@ namespace Shop_Project.Controllers
             return View(await _context.Game.ToListAsync());
         }
 
+        //public async Task<IActionResult> Search(string query)
+        //{
+
+        //    var q = from a in _context.Game.Include(a => a.Name)
+        //            where a.Name.Contains(query)
+        //            orderby a.Name descending
+        //            select a;
+
+        //    var shopProject = _context.Game.Include(q => q.Name);
+
+        //    return View("index",await _context.Game.ToListAsync());
+        //    //return View("index",await shopProject.ToListAsync());
+        //}
+
+        public async Task<IActionResult> Search(string search)
+        {
+            return View("index", await _context.Game.Where(a => a.Name.Contains(search) && a.Name.Contains(search)).ToListAsync());
+        }
+
         // GET: Games/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -46,6 +65,9 @@ namespace Shop_Project.Controllers
         // GET: Games/Create
         public IActionResult Create()
         {
+     // ViewData["articles"] = new SelectList(_context.Article.Where(x => x.CategoryId == null), nameof(Article.Id), nameof(Article.Title));
+            ViewData["genres"] = new SelectList( _context.Genre,nameof(Genre.Id), nameof(Genre.Name));
+        //    ViewData["genres"] = new SelectList(_context.Genre.Where())
             return View();
         }
 
@@ -54,10 +76,12 @@ namespace Shop_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description")] Game game)
+        public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description")] Game game,int[] Genres)
         {
             if (ModelState.IsValid)
             {
+                game.Genres = new List<Genre>();
+                game.Genres.AddRange(_context.Genre.Where(x => Genres.Contains(x.Id)));
                 _context.Add(game);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

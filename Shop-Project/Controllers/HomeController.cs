@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Shop_Project.Models;
@@ -23,8 +24,12 @@ namespace Shop_Project.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
+            /* if (HttpContext.Session.GetString("username") == null) {
+               return RedirectToAction("Login", "Users");
+           }*/
             return View();
         }
 

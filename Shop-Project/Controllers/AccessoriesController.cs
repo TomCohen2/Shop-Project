@@ -24,6 +24,10 @@ namespace Shop_Project.Controllers
         {
             return View(await _context.Accessory.ToListAsync());
         }
+        public async Task<IActionResult> Search(string search)
+        {
+            return View("index", await _context.Accessory.Where(a => a.Name.Contains(search)).ToListAsync());
+        }
 
         // GET: Accessories/Details/5
         public async Task<IActionResult> Details(int? id)

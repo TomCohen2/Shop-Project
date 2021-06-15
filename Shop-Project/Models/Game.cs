@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shop_Project.Models
 {
-    public class Game
+    public class Game 
     {
 
         public int Id { get; set; }
@@ -32,8 +32,10 @@ namespace Shop_Project.Models
 
         public String Description { get; set; }
 
+        
+        public virtual List<Genre> Genres { get; set; }
 
-        public List<Genre> genres { get; set; }
+     //   public List<Genre> genres { get; set; }
 
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Shop_Project.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Shop_Project
 {
@@ -29,6 +30,22 @@ namespace Shop_Project
 
             services.AddDbContext<Shop_ProjectContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("Shop_ProjectContext")));
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+            }
+            );
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.LoginPath = "/Users/Login";
+                options.AccessDeniedPath = "/Users/AccessDenied";
+            }
+            );
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,13 +66,17 @@ namespace Shop_Project
 
             app.UseRouting();
 
+            app.UseSession();
+
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Games}/{action=Index}/{id?}");
             });
         }
     }

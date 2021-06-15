@@ -23,5 +23,10 @@ namespace Shop_Project.Data
         public DbSet<Shop_Project.Models.Genre> Genre { get; set; }
 
         public DbSet<Shop_Project.Models.GenreImage> GenreImage { get; set; }
+
+        public DbSet<Shop_Project.Models.User> User { get; set; }
+
+        public DbSet<Shop_Project.Models.ShoppingCart> ShoppingCart { get; set; }
+
     }
 }
