@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Shop_Project.Data;
 using Shop_Project.Models;
+using Console = Shop_Project.Models.Console;
 
 namespace Shop_Project.Controllers
 {
@@ -41,7 +42,7 @@ namespace Shop_Project.Controllers
 
         public async Task<IActionResult> Search(string search)
         {
-            return View("index", await _context.Game.Where(a => a.Name.Contains(search) && a.Name.Contains(search)).ToListAsync());
+            return View("index", await _context.Game.Where(a => a.Name.Contains(search)).ToListAsync());
         }
 
         // GET: Games/Details/5
@@ -67,7 +68,9 @@ namespace Shop_Project.Controllers
         {
      // ViewData["articles"] = new SelectList(_context.Article.Where(x => x.CategoryId == null), nameof(Article.Id), nameof(Article.Title));
             ViewData["genres"] = new SelectList( _context.Genre,nameof(Genre.Id), nameof(Genre.Name));
-        //    ViewData["genres"] = new SelectList(_context.Genre.Where())
+            ViewData["consoles"] = new SelectList(_context.Console, nameof(Console.Id), nameof(Console.Name));
+
+            //    ViewData["genres"] = new SelectList(_context.Genre.Where())
             return View();
         }
 
@@ -76,12 +79,14 @@ namespace Shop_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description")] Game game,int[] Genres)
+        public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description")] Game game,int[] Genres,int[] Consoles)
         {
             if (ModelState.IsValid)
             {
                 game.Genres = new List<Genre>();
+                game.Consoles = new List<Console>();
                 game.Genres.AddRange(_context.Genre.Where(x => Genres.Contains(x.Id)));
+                game.Consoles.AddRange(_context.Console.Where(x => Consoles.Contains(x.Id)));
                 _context.Add(game);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

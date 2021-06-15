@@ -48,7 +48,7 @@ namespace Shop_Project.Controllers
         // GET: GenreImages/Create
         public IActionResult Create()
         {
-            ViewData["GenreId"] = new SelectList(_context.Genre, "Id", "Id");
+            ViewData["GenreId"] = new SelectList(_context.Genre, nameof(Genre.Id), nameof(Genre.Name));
             return View();
         }
 
@@ -61,6 +61,8 @@ namespace Shop_Project.Controllers
         {
             if (ModelState.IsValid)
             {
+
+
                 _context.Add(genreImage);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

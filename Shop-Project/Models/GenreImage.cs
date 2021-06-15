@@ -13,6 +13,8 @@ namespace Shop_Project.Models
         [DataType(DataType.ImageUrl)]
         public string Image { get; set; }
 
+
+        [Display(Name ="Genre")]
         public int GenreId { get; set; }
 
         public Genre Genre { get; set; }

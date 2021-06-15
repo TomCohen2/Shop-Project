@@ -35,9 +35,7 @@ namespace Shop_Project.Models
 
         public List<Accessory> accessories { get; set; }
 
-        public int ConsoleId { get; set; }
-
-        public List<Game> games { get; set; }
+        public int ConsoleId { get; set; } 
 
     }
 }

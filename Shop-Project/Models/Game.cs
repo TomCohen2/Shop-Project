@@ -32,6 +32,8 @@ namespace Shop_Project.Models
 
         public String Description { get; set; }
 
+
+        public virtual List<Console> Consoles { get; set; }
         
         public virtual List<Genre> Genres { get; set; }
 

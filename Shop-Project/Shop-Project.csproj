@@ -15,8 +15,4 @@
     <PackageReference Include="ServiceStack.Client" Version="5.11.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>
