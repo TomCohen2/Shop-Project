@@ -6,6 +6,12 @@
 
 <h1>Index</h1>
 
+<header>
+    <form asp-action="Search" asp-controller="Consoles">
+        <input name="search" placeholder="search.." />
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </form>
+</header>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -33,6 +39,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
+           
             <th></th>
         </tr>
     </thead>
@@ -60,6 +67,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
+          
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

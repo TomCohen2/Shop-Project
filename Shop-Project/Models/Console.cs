@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +15,10 @@ namespace Shop_Project.Models
 
         [DataType(DataType.ImageUrl)]
         public String Image { get; set; }
+
+       // [NotMapped]
+      //  public IFormFile imageFile { get; set; }
+
 
         [Required(ErrorMessage = "You must input console name")]
         public String Name { get; set; }
@@ -33,9 +39,9 @@ namespace Shop_Project.Models
         public String Description { get; set; }
 
 
-        public List<Accessory> accessories { get; set; }
+        public List<Game> games { get; set; }
 
-        public int ConsoleId { get; set; } 
+        public List<Accessory> accessories { get; set; }
 
     }
 }

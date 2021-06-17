@@ -10,23 +10,23 @@ using Shop_Project.Models;
 
 namespace Shop_Project.Controllers
 {
-    public class GenreImagesController : Controller
+    public class GenreimageController : Controller
     {
         private readonly Shop_ProjectContext _context;
 
-        public GenreImagesController(Shop_ProjectContext context)
+        public GenreimageController(Shop_ProjectContext context)
         {
             _context = context;
         }
 
-        // GET: GenreImages
+        // GET: Genreimage
         public async Task<IActionResult> Index()
         {
             var shop_ProjectContext = _context.GenreImage.Include(g => g.Genre);
             return View(await shop_ProjectContext.ToListAsync());
         }
 
-        // GET: GenreImages/Details/5
+        // GET: Genreimage/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,14 +45,14 @@ namespace Shop_Project.Controllers
             return View(genreImage);
         }
 
-        // GET: GenreImages/Create
+        // GET: Genreimage/Create
         public IActionResult Create()
         {
             ViewData["GenreId"] = new SelectList(_context.Genre, nameof(Genre.Id), nameof(Genre.Name));
             return View();
         }
 
-        // POST: GenreImages/Create
+        // POST: Genreimage/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -71,7 +71,7 @@ namespace Shop_Project.Controllers
             return View(genreImage);
         }
 
-        // GET: GenreImages/Edit/5
+        // GET: Genreimage/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,7 +88,7 @@ namespace Shop_Project.Controllers
             return View(genreImage);
         }
 
-        // POST: GenreImages/Edit/5
+        // POST: Genreimage/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -124,7 +124,7 @@ namespace Shop_Project.Controllers
             return View(genreImage);
         }
 
-        // GET: GenreImages/Delete/5
+        // GET: Genreimage/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,7 +143,7 @@ namespace Shop_Project.Controllers
             return View(genreImage);
         }
 
-        // POST: GenreImages/Delete/5
+        // POST: Genreimage/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

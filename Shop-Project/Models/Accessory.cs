@@ -32,6 +32,9 @@ namespace Shop_Project.Models
 
         public String Description { get; set; }
 
+
+        public int ConsoleId { get; set; }
+
         public List<Console> consoles { get; set; }
 
 

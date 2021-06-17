@@ -56,6 +56,9 @@ namespace Shop_Project.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ConsoleId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateOfRelease")
                         .HasColumnType("datetime2");
 
@@ -90,17 +93,11 @@ namespace Shop_Project.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ConsoleId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateOfRelease")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("GameId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
@@ -119,8 +116,6 @@ namespace Shop_Project.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GameId");
 
                     b.ToTable("Console");
                 });
@@ -132,6 +127,9 @@ namespace Shop_Project.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ConsoleId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateOfRelease")
                         .HasColumnType("datetime2");
 
@@ -155,6 +153,8 @@ namespace Shop_Project.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ConsoleId");
 
                     b.ToTable("Game");
                 });
@@ -248,11 +248,15 @@ namespace Shop_Project.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop_Project.Models.Console", b =>
+            modelBuilder.Entity("Shop_Project.Models.Game", b =>
                 {
-                    b.HasOne("Shop_Project.Models.Game", null)
-                        .WithMany("Consoles")
-                        .HasForeignKey("GameId");
+                    b.HasOne("Shop_Project.Models.Console", "Console")
+                        .WithMany("games")
+                        .HasForeignKey("ConsoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Console");
                 });
 
             modelBuilder.Entity("Shop_Project.Models.GenreImage", b =>
@@ -266,9 +270,9 @@ namespace Shop_Project.Migrations
                     b.Navigation("Genre");
                 });
 
-            modelBuilder.Entity("Shop_Project.Models.Game", b =>
+            modelBuilder.Entity("Shop_Project.Models.Console", b =>
                 {
-                    b.Navigation("Consoles");
+                    b.Navigation("games");
                 });
 
             modelBuilder.Entity("Shop_Project.Models.Genre", b =>

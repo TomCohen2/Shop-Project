@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Shop_Project.Data;
 using Shop_Project.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Console = Shop_Project.Models.Console;
 
 namespace Shop_Project.Controllers
@@ -18,17 +19,13 @@ namespace Shop_Project.Controllers
         public ConsolesController(Shop_ProjectContext context)
         {
             _context = context;
+
         }
 
         // GET: Consoles
         public async Task<IActionResult> Index()
         {
             return View(await _context.Console.ToListAsync());
-        }
-
-        public async Task<IActionResult> Search(string search)
-        {
-            return View("index", await _context.Console.Where(a => a.Name.Contains(search) && a.Name.Contains(search)).ToListAsync());
         }
 
         // GET: Consoles/Details/5
@@ -49,6 +46,28 @@ namespace Shop_Project.Controllers
             return View(console);
         }
 
+        // GET: Consoles/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Consoles/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description")] Console console)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                _context.Add(console);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(console);
+        }
         public async Task<IActionResult> ConsolePage(int? id)
         {
             if (id == null)
@@ -66,29 +85,11 @@ namespace Shop_Project.Controllers
             return View(console);
         }
 
+        //var gameSearch = _context.Product.Where(a => a.Consoles.Contains(w));
 
+        //var nu = gameSearch.Where(a => a.Genre != GenreType.Accessories && a.Genre != GenreType.Consoles);
 
-        // GET: Consoles/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Consoles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId")] Console console)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(console);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(console);
-        }
+        //    return View("MainPage", await nu.ToListAsync());
 
         // GET: Consoles/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -111,7 +112,7 @@ namespace Shop_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId")] Console console)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description")] Console console)
         {
             if (id != console.Id)
             {

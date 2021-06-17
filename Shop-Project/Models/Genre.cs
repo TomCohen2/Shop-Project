@@ -12,6 +12,7 @@ namespace Shop_Project.Models
 
         public String Name { get; set; }
 
+
         public List<Game> games { set; get; }
 
         public GenreImage GenreImage { get; set; }

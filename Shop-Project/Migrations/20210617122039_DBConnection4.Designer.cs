@@ -10,8 +10,8 @@ using Shop_Project.Data;
 namespace Shop_Project.Migrations
 {
     [DbContext(typeof(Shop_ProjectContext))]
-    [Migration("20210615081446_InitCart")]
-    partial class InitCart
+    [Migration("20210617122039_DBConnection4")]
+    partial class DBConnection4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,6 +58,9 @@ namespace Shop_Project.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ConsoleId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateOfRelease")
                         .HasColumnType("datetime2");
 
@@ -77,7 +80,38 @@ namespace Shop_Project.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ShoppingCartId")
+                    b.Property<string>("trailer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Accessory");
+                });
+
+            modelBuilder.Entity("Shop_Project.Models.Console", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateOfRelease")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<string>("trailer")
@@ -85,12 +119,10 @@ namespace Shop_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ShoppingCartId");
-
-                    b.ToTable("Accessory");
+                    b.ToTable("Console");
                 });
 
-            modelBuilder.Entity("Shop_Project.Models.Console", b =>
+            modelBuilder.Entity("Shop_Project.Models.Game", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -119,59 +151,12 @@ namespace Shop_Project.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ShoppingCartId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("trailer")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ShoppingCartId");
-
-                    b.ToTable("Console");
-                });
-
-            modelBuilder.Entity("Shop_Project.Models.Game", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ConsoleId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateOfRelease")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ShoppingCartId")
-                        .HasColumnType("int");
-
                     b.Property<string>("trailer")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ConsoleId");
-
-                    b.HasIndex("ShoppingCartId");
 
                     b.ToTable("Game");
                 });
@@ -210,21 +195,6 @@ namespace Shop_Project.Migrations
                         .IsUnique();
 
                     b.ToTable("GenreImage");
-                });
-
-            modelBuilder.Entity("Shop_Project.Models.ShoppingCart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("TotalAmount")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ShoppingCart");
                 });
 
             modelBuilder.Entity("Shop_Project.Models.User", b =>
@@ -280,29 +250,15 @@ namespace Shop_Project.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop_Project.Models.Accessory", b =>
-                {
-                    b.HasOne("Shop_Project.Models.ShoppingCart", null)
-                        .WithMany("accessoriesInCart")
-                        .HasForeignKey("ShoppingCartId");
-                });
-
-            modelBuilder.Entity("Shop_Project.Models.Console", b =>
-                {
-                    b.HasOne("Shop_Project.Models.ShoppingCart", null)
-                        .WithMany("consolesInCart")
-                        .HasForeignKey("ShoppingCartId");
-                });
-
             modelBuilder.Entity("Shop_Project.Models.Game", b =>
                 {
-                    b.HasOne("Shop_Project.Models.Console", null)
+                    b.HasOne("Shop_Project.Models.Console", "Console")
                         .WithMany("games")
-                        .HasForeignKey("ConsoleId");
+                        .HasForeignKey("ConsoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Shop_Project.Models.ShoppingCart", null)
-                        .WithMany("gamesInCart")
-                        .HasForeignKey("ShoppingCartId");
+                    b.Navigation("Console");
                 });
 
             modelBuilder.Entity("Shop_Project.Models.GenreImage", b =>
@@ -324,15 +280,6 @@ namespace Shop_Project.Migrations
             modelBuilder.Entity("Shop_Project.Models.Genre", b =>
                 {
                     b.Navigation("GenreImage");
-                });
-
-            modelBuilder.Entity("Shop_Project.Models.ShoppingCart", b =>
-                {
-                    b.Navigation("accessoriesInCart");
-
-                    b.Navigation("consolesInCart");
-
-                    b.Navigation("gamesInCart");
                 });
 #pragma warning restore 612, 618
         }

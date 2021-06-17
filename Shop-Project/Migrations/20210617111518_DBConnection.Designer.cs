@@ -10,8 +10,8 @@ using Shop_Project.Data;
 namespace Shop_Project.Migrations
 {
     [DbContext(typeof(Shop_ProjectContext))]
-    [Migration("20210615122344_consoles")]
-    partial class consoles
+    [Migration("20210617111518_DBConnection")]
+    partial class DBConnection
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

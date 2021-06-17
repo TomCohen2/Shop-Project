@@ -33,8 +33,10 @@ namespace Shop_Project.Models
         public String Description { get; set; }
 
 
-        public virtual List<Console> Consoles { get; set; }
-        
+        public int ConsoleId { get; set; }
+
+        public virtual Console Console { get; set; }
+
         public virtual List<Genre> Genres { get; set; }
 
      //   public List<Genre> genres { get; set; }

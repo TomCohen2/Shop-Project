@@ -10,8 +10,8 @@ using Shop_Project.Data;
 namespace Shop_Project.Migrations
 {
     [DbContext(typeof(Shop_ProjectContext))]
-    [Migration("20210613094842_init3")]
-    partial class init3
+    [Migration("20210617120113_DBConnection3")]
+    partial class DBConnection3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,15 +38,15 @@ namespace Shop_Project.Migrations
 
             modelBuilder.Entity("GameGenre", b =>
                 {
+                    b.Property<int>("GenresId")
+                        .HasColumnType("int");
+
                     b.Property<int>("gamesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("genresId")
-                        .HasColumnType("int");
+                    b.HasKey("GenresId", "gamesId");
 
-                    b.HasKey("gamesId", "genresId");
-
-                    b.HasIndex("genresId");
+                    b.HasIndex("gamesId");
 
                     b.ToTable("GameGenre");
                 });
@@ -57,6 +57,9 @@ namespace Shop_Project.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ConsoleId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfRelease")
                         .HasColumnType("datetime2");
@@ -92,9 +95,6 @@ namespace Shop_Project.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ConsoleId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateOfRelease")
                         .HasColumnType("datetime2");
 
@@ -129,7 +129,7 @@ namespace Shop_Project.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ConsoleId")
+                    b.Property<int>("ConsoleId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfRelease")
@@ -237,24 +237,28 @@ namespace Shop_Project.Migrations
 
             modelBuilder.Entity("GameGenre", b =>
                 {
-                    b.HasOne("Shop_Project.Models.Game", null)
+                    b.HasOne("Shop_Project.Models.Genre", null)
                         .WithMany()
-                        .HasForeignKey("gamesId")
+                        .HasForeignKey("GenresId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Shop_Project.Models.Genre", null)
+                    b.HasOne("Shop_Project.Models.Game", null)
                         .WithMany()
-                        .HasForeignKey("genresId")
+                        .HasForeignKey("gamesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Shop_Project.Models.Game", b =>
                 {
-                    b.HasOne("Shop_Project.Models.Console", null)
+                    b.HasOne("Shop_Project.Models.Console", "Console")
                         .WithMany("games")
-                        .HasForeignKey("ConsoleId");
+                        .HasForeignKey("ConsoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Console");
                 });
 
             modelBuilder.Entity("Shop_Project.Models.GenreImage", b =>

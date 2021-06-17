@@ -1,10 +1,17 @@
-﻿@model IEnumerable<Shop_Project.Models.Console>
+﻿@model IEnumerable<Shop_Project.Models.Game>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
+
+<header>
+    <form asp-action="Search" asp-controller="Games" >
+        <input name="search" placeholder="search.." />
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </form>
+</header>
 
 <p>
     <a asp-action="Create">Create New</a>
