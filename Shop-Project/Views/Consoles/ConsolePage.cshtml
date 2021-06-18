@@ -1,59 +1,1 @@
-﻿@model Shop_Project.Models.Console
-
-
-@{
-    ViewData["Title"] = "ConsolePage";
-}
-
-<h1>Console Page</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateOfRelease)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.trailer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.games)
-
-        {
-            <div class="col-md-3 mb-2">
-                <a asp-action="GamePage" asp-controller="Products" asp-route-id="@item.Id">
-                    <div class="card border-secondary bg-dark">
-                        <img src="@Html.DisplayFor(modelItem => item.Image)" class="card-img-top" alt="display" />
-                        <div class="card-img-overlay">
-                        </div>
-                        <div class="card-body text-center">
-                            <p class="text-white">
-                                @Html.DisplayFor(modelItem => item.Name)
-                                <br />
-                                Price: @Html.DisplayFor(modelItem => item.Price)
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        }
-    </tbody>
-</table>
+﻿@model IEnumerable<GroupGameConsole>@{ ViewData["Title"] = "GroupBy";}@foreach (var group in Model){    <div class="d-flex justify-content-center container mt-5">        <div class="card p-3 bg-white">            <i class="fa fa-apple"></i>            <div class="about-product text-center mt-2">                <img src="https://i.imgur.com/3VTaSeb.png" width="300">                <div>                    <h4>@group.Name</h4>                    <h6 class="mt-0 text-black-50">@group.Price $</h6>                    <h6 class="mt-0 text-black-50">@group.ConsoleId </h6>                </div>            </div>        </div>    </div>}

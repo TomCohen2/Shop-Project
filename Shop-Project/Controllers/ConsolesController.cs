@@ -49,6 +49,7 @@ namespace Shop_Project.Controllers
         // GET: Consoles/Create
         public IActionResult Create()
         {
+            ViewData["Games"] = new SelectList(_context.Game, "Id", "Name");
             return View();
         }
 
@@ -61,35 +62,42 @@ namespace Shop_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 _context.Add(console);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["Games"] = new SelectList(_context.Game, "Id", "Name");
             return View(console);
         }
+
+
         public async Task<IActionResult> ConsolePage(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            IEnumerable<GroupGameConsole> sorted =
+                              from a in _context.Game
+                              group a by new
+                              {
+                                  a.Name,
+                                  a.Price,
+                                  a.ConsoleId,
 
-            var console = await _context.Console
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (console == null)
-            {
-                return NotFound();
-            }
+                              } into k select new GroupGameConsole
+                              {
+                                  Name = k.Key.Name,
+                                  Price = k.Key.Price,
+                                  ConsoleId = k.Key.ConsoleId,
+                              };
 
-            return View(console);
+            return View(sorted.ToList());
+
+        }
+        public async Task<IActionResult> Search(string search)
+        {
+            return View("index", await _context.Console.Where(a => a.Name.Contains(search)).ToListAsync());
         }
 
-        //var gameSearch = _context.Product.Where(a => a.Consoles.Contains(w));
 
-        //var nu = gameSearch.Where(a => a.Genre != GenreType.Accessories && a.Genre != GenreType.Consoles);
-
-        //    return View("MainPage", await nu.ToListAsync());
 
         // GET: Consoles/Edit/5
         public async Task<IActionResult> Edit(int? id)

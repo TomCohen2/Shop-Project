@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Shop_Project.Models
 {
     public class Console 
@@ -39,7 +40,7 @@ namespace Shop_Project.Models
         public String Description { get; set; }
 
 
-        public List<Game> games { get; set; }
+        public List<Game> Games { get; set; }
 
         public List<Accessory> accessories { get; set; }
 

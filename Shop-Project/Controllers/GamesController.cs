@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Shop_Project.Data;
 using Shop_Project.Models;
+using Console = Shop_Project.Models.Console;
 
 namespace Shop_Project.Controllers
 {
@@ -48,6 +49,7 @@ namespace Shop_Project.Controllers
         // GET: Games/Create
         public IActionResult Create()
         {
+            ViewData["Genres"] = new SelectList(_context.Genre, nameof(Genre.Id), nameof(Genre.Name));
             ViewData["ConsoleId"] = new SelectList(_context.Console, "Id", "Name");
             return View();
         }
@@ -58,14 +60,11 @@ namespace Shop_Project.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId")] Game game)
+
         {
             if (ModelState.IsValid)
             {
-
-              
-             //   var q = from a in _context.Console where a.Id == ConsoleId select a.games;
                 _context.Add(game);
-
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
