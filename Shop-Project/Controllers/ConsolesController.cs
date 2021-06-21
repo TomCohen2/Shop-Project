@@ -72,21 +72,64 @@ namespace Shop_Project.Controllers
         }
 
 
-        public async Task<IActionResult> ConsolePage(int? id)
+        public async Task<IActionResult> GamePage(int? id)
         {
             IEnumerable<GroupGameConsole> sorted =
-                              from a in _context.Game
+                              from a in _context.Game where(a.ConsoleId == id)
                               group a by new
                               {
                                   a.Name,
                                   a.Price,
-                                  a.ConsoleId,
+                                  a.Image,
 
                               } into k select new GroupGameConsole
                               {
                                   Name = k.Key.Name,
                                   Price = k.Key.Price,
-                                  ConsoleId = k.Key.ConsoleId,
+                                  Image= k.Key.Image,
+                              };
+
+            return View(sorted.ToList());
+
+        }
+
+        public async Task<IActionResult> AccessoryPage(int? id)
+        {
+            IEnumerable<GroupGameConsole> sorted =
+                              from a in _context.Accessory
+                              where (a.ConsoleId == id)
+                              group a by new
+                              {
+                                  a.Name,
+                                  a.Price,
+
+                              } into k
+                              select new GroupGameConsole
+                              {
+                                  Name = k.Key.Name,
+                                  Price = k.Key.Price,
+                              };
+
+            return View(sorted.ToList());
+
+        }
+
+
+        public async Task<IActionResult> ConsolePage(int? id)
+        {
+            IEnumerable<GroupGameConsole> sorted =
+                              from a in _context.Console
+                              where (a.Id == id)
+                              group a by new
+                              {
+                                  a.Name,
+                                  a.Price,
+
+                              } into k
+                              select new GroupGameConsole
+                              {
+                                  Name = k.Key.Name,
+                                  Price = k.Key.Price,
                               };
 
             return View(sorted.ToList());

@@ -14,7 +14,7 @@ namespace Shop_Project.Models
         [DataType(DataType.ImageUrl)]
         public String Image { get; set; }
 
-        [Required(ErrorMessage = "You must input game name")]
+     //   [Required(ErrorMessage = "You must input game name")]
         public String Name { get; set; }
 
    //     [Display(Name = "Date Of Release")]
@@ -39,7 +39,6 @@ namespace Shop_Project.Models
 
         public virtual List<Genre> Genres { get; set; }
 
-     //   public List<Genre> genres { get; set; }
 
     }
 }

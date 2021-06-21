@@ -23,7 +23,7 @@ namespace Shop_Project.Controllers
         // GET: Games
         public async Task<IActionResult> Index()
         {
-            var shop_ProjectContext = _context.Game.Include(g => g.Console);
+            var shop_ProjectContext = _context.Game.Include(g => g.Console).Include(g => g.Genres);
             return View(await shop_ProjectContext.ToListAsync());
         }
 
@@ -36,7 +36,7 @@ namespace Shop_Project.Controllers
             }
 
             var game = await _context.Game
-                .Include(g => g.Console)
+                .Include(g => g.Console).Include(g=>g.Genres)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (game == null)
             {
@@ -59,16 +59,25 @@ namespace Shop_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId")] Game game)
+        public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId,Genre")] Game game, Genre genre)
 
         {
             if (ModelState.IsValid)
             {
+
+                
+
+                //var existingSkillIds = teacher.skills.Select(m => m.Id);
+                //db.Skills.Where(m => model.skillIds.Exclude(existingSkillIds).Contains(m.Id))
+                //    .ToList().ForEach(skill => teacher.skills.Add(skill));
+
+                //  var q = game.Genres.Select(m => m.Name);
                 _context.Add(game);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ConsoleId"] = new SelectList(_context.Console, "Id", "Name", game.ConsoleId);
+               ViewData["Genres"] = new SelectList(_context.Genre, nameof(Genre.Id), nameof(Genre.Name),game.Genres);
             return View(game);
         }
 

@@ -9,12 +9,16 @@ namespace Shop_Project.Models
     public class GroupGameConsole
     {
 
+
+
+        [DataType(DataType.ImageUrl)]
+        public String Image { get; set; }
+
         public string Name { get; set; }
 
         public double Price { get; set; }
 
-       
-        public int ConsoleId { get; set; }
+       public List<Genre> Genres { get; set; }
 
 
     }

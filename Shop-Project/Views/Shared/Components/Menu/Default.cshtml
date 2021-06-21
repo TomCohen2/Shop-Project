@@ -4,12 +4,43 @@
     <div class="container">
                     @foreach (var console in Model)
                     {
-                        <div class="navbar-light box-shadow">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Consoles" asp-action="ConsolePage" asp-route-id="@console.Id">@console.Name</a>
-                        </div>
+        <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                @console.Name
+            </button>
+            <div class="dropdown-menu">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Consoles"
+                   asp-action="ConsolePage" asp-route-id="@console.Id">@console.Name Consoles</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Consoles"
+                   asp-action="GamePage" asp-route-id="@console.Id">@console.Name Games</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Consoles"
+                   asp-action="AccessoryPage" asp-route-id="@console.Id">@console.Name Accessories</a>
+            </div>
+        </div>
 
                     }
-                </ul>
             </div>
-    </div>
 </nav>
+
+<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0;
+       
+    }
+</style>
