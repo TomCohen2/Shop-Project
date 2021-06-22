@@ -4,63 +4,55 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="white">Details</h1>
 
 <div>
-    <h4>Game</h4>
+    <h4>@Html.DisplayFor(model => model.Name)</h4> 
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
+        <dd class="col-sm-10">
+            <img src="@Html.DisplayFor(model => model.Image)" alt="display" width="300" height="400" />
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+        <dd class="col-sm-2">
+            <b>@Html.DisplayNameFor(model => model.DateOfRelease):</b>   @Html.DisplayFor(model => model.DateOfRelease)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOfRelease)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateOfRelease)
-        </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Price)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Price)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.trailer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.trailer)
-        </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Quantity)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Quantity)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Genres)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var item in Model.Genres)
+            {
+            <li>@item.Name</li>
+            }
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Console)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Console.Name)
+        <dd class="col-sm-10">
+            <iframe src="@Html.DisplayFor(model => model.trailer)" width="420" height="345"></iframe>
+        </dd>
+        <dd class="col-sm-10">
+            <b class="text-danger">Game for </b><b>@Html.DisplayFor(model => model.Console.Name) <b class="text-danger">ONLY</b>
         </dd>
     </dl>
 </div>
-<div>
+<div >
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+

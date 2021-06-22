@@ -1,20 +1,20 @@
 ﻿@model IEnumerable<Shop_Project.Models.Console>
 
-<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-    <div class="container">
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-none border-bottom box-shadow mb-3">
+    <div class="container navbg">
                     @foreach (var console in Model)
                     {
         <div class="dropdown">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <button type="button" class="btn dropdown-toggle bottonbgM" data-toggle="dropdown">
                 @console.Name
             </button>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu dropbg">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Consoles"
-                   asp-action="ConsolePage" asp-route-id="@console.Id">@console.Name Consoles</a>
+                   asp-action="GamePage" asp-route-id="@console.Id">Games</a>
+                <a class="nav-link text-warning" asp-area="" asp-controller="Consoles"
+                   asp-action="AccessoryPage" asp-route-id="@console.Id">Accessories</a>
                 <a class="nav-link text-dark" asp-area="" asp-controller="Consoles"
-                   asp-action="GamePage" asp-route-id="@console.Id">@console.Name Games</a>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Consoles"
-                   asp-action="AccessoryPage" asp-route-id="@console.Id">@console.Name Accessories</a>
+                   asp-action="ConsolePage" asp-route-id="@console.Id">Consoles</a>
             </div>
         </div>
 

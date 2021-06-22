@@ -57,18 +57,15 @@
                 <select asp-for="Genres" class="form-control" multiple asp-items="ViewBag.Genres"></select>
                 <span asp-validation-for="Genres" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
