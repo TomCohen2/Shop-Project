@@ -50,7 +50,7 @@ namespace Shop_Project.Controllers
         public IActionResult Create()
         {
             ViewData["Genres"] = new SelectList(_context.Genre, nameof(Genre.Id), nameof(Genre.Name));
-            ViewData["ConsoleId"] = new SelectList(_context.Console, "Id", "Name");
+            ViewData["ConsoleId"] = new SelectList(_context.Console, nameof(Console.Id), nameof(Console.Name));
             return View();
         }
 
@@ -76,8 +76,8 @@ namespace Shop_Project.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsoleId"] = new SelectList(_context.Console, "Id", "Name", game.ConsoleId);
-               ViewData["Genres"] = new SelectList(_context.Genre, nameof(Genre.Id), nameof(Genre.Name),game.Genres);
+            ViewData["Genres"] = new SelectList(_context.Genre, nameof(Genre.Id), nameof(Genre.Name), game.Genres);
+            ViewData["ConsoleId"] = new SelectList(_context.Console, nameof(Console.Id), nameof(Console.Name), game.ConsoleId);
             return View(game);
         }
 
@@ -94,7 +94,8 @@ namespace Shop_Project.Controllers
             {
                 return NotFound();
             }
-            ViewData["ConsoleId"] = new SelectList(_context.Console, "Id", "Name", game.ConsoleId);
+            ViewData["Genres"] = new SelectList(_context.Genre, nameof(Genre.Id), nameof(Genre.Name));
+            ViewData["ConsoleId"] = new SelectList(_context.Console, nameof(Console.Id), nameof(Console.Name));
             return View(game);
         }
 
@@ -130,7 +131,8 @@ namespace Shop_Project.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsoleId"] = new SelectList(_context.Console, "Id", "Name", game.ConsoleId);
+            ViewData["Genres"] = new SelectList(_context.Genre, nameof(Genre.Id), nameof(Genre.Name), game.Genres);
+            ViewData["ConsoleId"] = new SelectList(_context.Console, nameof(Console.Id), nameof(Console.Name), game.ConsoleId);
             return View(game);
         }
 

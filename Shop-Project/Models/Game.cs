@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace Shop_Project.Models
 
    //     [Required(ErrorMessage = "You must input quantity")]
         [Range(0, 100)]
+        [Display(Name = "Left in stock")]
         public int Quantity { get; set; }
 
         public String Description { get; set; }
