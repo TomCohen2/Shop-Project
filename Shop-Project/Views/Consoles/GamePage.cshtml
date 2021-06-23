@@ -1,1 +1,9 @@
-﻿@model IEnumerable<GroupGameConsole>@{ ViewData["Title"] = "GroupBy";}@foreach (var group in Model){<div class="d-flex justify-content-center container mt-5">    <div class="card p-3 bg-white">        <i class="fa fa-apple"></i>        <div class="about-product text-center mt-2">            <img src="@group.Image" width="300">            <div>                <h4>@group.Name</h4>                <h6 class="mt-0 text-black-50">@group.Price $</h6>            </div>        </div>    </div></div>}
+﻿@model IEnumerable<GroupGameConsole>@{ ViewData["Title"] = "GroupBy";}@foreach (var group in Model){    <div class="card mycard text-left" style="width:200px">            <img src="@group.Image" width="200" height="220">            <h4 class="card-title textsize14">@group.Name</h4>            <h6 class="mt-0 text-black-50 textsize10">@group.Price $</h6>    </div>}<style>
+    .textsize14 {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .textsize10 {
+        font-size: 10px;
+    }    .mycard {        background: none;        display: inline-block;    }</style>

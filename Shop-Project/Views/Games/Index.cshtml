@@ -3,9 +3,10 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-
-<h4 class="white">Games in stock</h4>
+<head>
+    <link rel="stylesheet" href="~/css/mahtel.css" />
+    <h4 class="white">Games in stock</h4>
+</head>
 
 <p class="white">
     <a asp-action="Create">Create New Product</a>
@@ -14,8 +15,8 @@
 
     @foreach (var item in Model)
     {
-        <div class="card mycard" style="width:200px"  >
-             
+        <div class="card mycard" style="width:200px">
+
             <a href="@Url.Action("Details","Games",new { id = item.Id })">
                 <img class="btn card-img-top" style="height:220px" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image">
             </a>
@@ -29,31 +30,36 @@
 
 </body>
 <style>
+
     .detailbtncolor {
         border-color: #9ab80b;
         background-color: #9ab80b;
         display: block;
         left: 50%;
     }
+
         .detailbtncolor:hover {
             border-color: #90ac0a;
             background-color: #90ac0a;
         }
 
-    .textsize14{
+    .textsize14 {
         font-size: 14px;
-        font-weight:bold;       
+        font-weight: bold;
     }
+
     .textsize10 {
-        font-size: 10px;        
+        font-size: 10px;
     }
+
     .mycontainer {
         width: 100%;
-       
     }
 
     .mycard {
-        background:none;
+        background: none;
         display: inline-block;
     }
+
+
 </style>
