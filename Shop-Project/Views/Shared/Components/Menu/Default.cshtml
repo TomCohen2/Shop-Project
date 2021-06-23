@@ -2,27 +2,35 @@
 
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-none border-bottom box-shadow mb-3">
     <div class="container navbg">
-                    @foreach (var console in Model)
-                    {
-        <div class="dropdown">
-            <button type="button" class="btn dropdown-toggle bottonbgM" data-toggle="dropdown">
-                @console.Name
-            </button>
-            <div class="dropdown-menu dropbg">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Consoles"
-                   asp-action="GamePage" asp-route-id="@console.Id">Games</a>
-                <a class="nav-link text-warning" asp-area="" asp-controller="Consoles"
-                   asp-action="AccessoryPage" asp-route-id="@console.Id">Accessories</a>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Consoles"
-                   asp-action="ConsolePage" asp-route-id="@console.Id">Consoles</a>
+        @foreach (var console in Model)
+        {
+            <div class="dropdown">
+                <button type="button" class="btn dropdown-toggle bottonbgM" data-toggle="dropdown">
+                    @console.Name
+                </button>
+                <div class="dropdown-menu dropbg">
+                    <a class="nav-link navcolor" asp-area="" asp-controller="Consoles"
+                       asp-action="GamePage" asp-route-id="@console.Id"><b>Games</b></a>
+                    <a class="nav-link navcolor" asp-area="" asp-controller="Consoles"
+                       asp-action="ConsolePage" asp-route-id="@console.Id"><b>Consoles</b></a>
+                    <a class="nav-link navcolor" asp-area="" asp-controller="Consoles"
+                       asp-action="AccessoryPage" asp-route-id="@console.Id"><b>Accessories</b></a>
+                </div>
             </div>
-        </div>
 
-                    }
-            </div>
+        }
+    </div>
 </nav>
 
 <style>
+    .navcolor {
+        color: firebrick;
+        padding-left:0;
+        
+    }
+        .navcolor:hover {
+            color: darkred;
+        }
     .dropdown {
         position: relative;
         display: inline-block;
@@ -41,6 +49,5 @@
     .dropdown:hover .dropdown-menu {
         display: block;
         margin-top: 0;
-       
     }
 </style>
