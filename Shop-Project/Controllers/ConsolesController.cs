@@ -49,7 +49,7 @@ namespace Shop_Project.Controllers
         // GET: Consoles/Create
         public IActionResult Create()
         {
-            ViewData["Games"] = new SelectList(_context.Game, "Id", "Name");
+            ViewData["Games"] = new SelectList(_context.Game, nameof(Game.Id),nameof(Game.Name));
             return View();
         }
 
@@ -67,18 +67,18 @@ namespace Shop_Project.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Games"] = new SelectList(_context.Game, "Id", "Name");
+
+            ViewData["Games"] = new SelectList(_context.Game, nameof(Game.Id),nameof(Game.Name));
             return View(console);
         }
-
-        public async Task<IActionResult> AllConsoleCollectionPage(int? id)
+        public async Task<IActionResult> ConsoleVersionPage(int? id)
         {
             IEnumerable<GroupGameConsole> sorted =
-                              from a in _context.Game
+                              from a in _context.ConsoleVersion
                               where (a.ConsoleId == id)
                               group a by new
                               {
-
+                                  a.Id,
                                   a.Name,
                                   a.Price,
                                   a.Image,
@@ -86,6 +86,7 @@ namespace Shop_Project.Controllers
                               } into k
                               select new GroupGameConsole
                               {
+                                  Id = k.Key.Id,
                                   Name = k.Key.Name,
                                   Price = k.Key.Price,
                                   Image = k.Key.Image,
@@ -146,14 +147,12 @@ namespace Shop_Project.Controllers
                               where (a.Id == id)
                               group a by new
                               {
-                                  a.Name,
-                                  a.Price,
+                                  a.Name,                                 
 
                               } into k
                               select new GroupGameConsole
                               {
-                                  Name = k.Key.Name,
-                                  Price = k.Key.Price,
+                                  Name = k.Key.Name,                                  
                               };
 
             return View(sorted.ToList());
@@ -187,7 +186,7 @@ namespace Shop_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description")] Console console)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,")] Console console)
         {
             if (id != console.Id)
             {

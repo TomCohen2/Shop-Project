@@ -11,23 +11,23 @@ using Console = Shop_Project.Models.Console;
 
 namespace Shop_Project.Controllers
 {
-    public class GamesController : Controller
+    public class ConsoleVersionsController : Controller
     {
         private readonly Shop_ProjectContext _context;
 
-        public GamesController(Shop_ProjectContext context)
+        public ConsoleVersionsController(Shop_ProjectContext context)
         {
             _context = context;
         }
 
-        // GET: Games
+        // GET: ConsoleVersions
         public async Task<IActionResult> Index()
         {
-            var shop_ProjectContext = _context.Game.Include(g => g.Console).Include(g => g.Genres);
+            var shop_ProjectContext = _context.ConsoleVersion.Include(c => c.Console);
             return View(await shop_ProjectContext.ToListAsync());
         }
 
-        // GET: Games/Details/5
+        // GET: ConsoleVersions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,53 +35,42 @@ namespace Shop_Project.Controllers
                 return NotFound();
             }
 
-            var game = await _context.Game
-                .Include(g => g.Console).Include(g=>g.Genres)
+            var consoleVersion = await _context.ConsoleVersion
+                .Include(c => c.Console)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (game == null)
+            if (consoleVersion == null)
             {
                 return NotFound();
             }
 
-            return View(game);
+            return View(consoleVersion);
         }
 
-        // GET: Games/Create
+        // GET: ConsoleVersions/Create
         public IActionResult Create()
         {
-            ViewData["Genres"] = new SelectList(_context.Genre, nameof(Genre.Id), nameof(Genre.Name));
             ViewData["ConsoleId"] = new SelectList(_context.Console, nameof(Console.Id), nameof(Console.Name));
             return View();
         }
 
-        // POST: Games/Create
+        // POST: ConsoleVersions/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId,Genre")] Game game, Genre genre)
-
+        public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId")] ConsoleVersion consoleVersion)
         {
             if (ModelState.IsValid)
             {
-
-                
-
-                //var existingSkillIds = teacher.skills.Select(m => m.Id);
-                //db.Skills.Where(m => model.skillIds.Exclude(existingSkillIds).Contains(m.Id))
-                //    .ToList().ForEach(skill => teacher.skills.Add(skill));
-
-                //  var q = game.Genres.Select(m => m.Name);
-                _context.Add(game);
+                _context.Add(consoleVersion);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Genres"] = new SelectList(_context.Genre, nameof(Genre.Id), nameof(Genre.Name), game.Genres);
-            ViewData["ConsoleId"] = new SelectList(_context.Console, nameof(Console.Id), nameof(Console.Name), game.ConsoleId);
-            return View(game);
+            ViewData["ConsoleId"] = new SelectList(_context.Console, nameof(Console.Id),nameof(Console.Name), consoleVersion.ConsoleId);
+            return View(consoleVersion);
         }
 
-        // GET: Games/Edit/5
+        // GET: ConsoleVersions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,24 +78,23 @@ namespace Shop_Project.Controllers
                 return NotFound();
             }
 
-            var game = await _context.Game.FindAsync(id);
-            if (game == null)
+            var consoleVersion = await _context.ConsoleVersion.FindAsync(id);
+            if (consoleVersion == null)
             {
                 return NotFound();
             }
-            ViewData["Genres"] = new SelectList(_context.Genre, nameof(Genre.Id), nameof(Genre.Name));
-            ViewData["ConsoleId"] = new SelectList(_context.Console, nameof(Console.Id), nameof(Console.Name));
-            return View(game);
+            ViewData["ConsoleId"] = new SelectList(_context.Console, nameof(Console.Id), nameof(Console.Name), consoleVersion.ConsoleId);
+            return View(consoleVersion);
         }
 
-        // POST: Games/Edit/5
+        // POST: ConsoleVersions/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId,Genre")] Game game, Genre genre)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId")] ConsoleVersion consoleVersion)
         {
-            if (id != game.Id)
+            if (id != consoleVersion.Id)
             {
                 return NotFound();
             }
@@ -115,12 +103,12 @@ namespace Shop_Project.Controllers
             {
                 try
                 {
-                    _context.Update(game);
+                    _context.Update(consoleVersion);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GameExists(game.Id))
+                    if (!ConsoleVersionExists(consoleVersion.Id))
                     {
                         return NotFound();
                     }
@@ -131,12 +119,11 @@ namespace Shop_Project.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Genres"] = new SelectList(_context.Genre, nameof(Genre.Id), nameof(Genre.Name), game.Genres);
-            ViewData["ConsoleId"] = new SelectList(_context.Console, nameof(Console.Id), nameof(Console.Name), game.ConsoleId);
-            return View(game);
+            ViewData["ConsoleId"] = new SelectList(_context.Console, nameof(Console.Id), nameof(Console.Name), consoleVersion.ConsoleId);
+            return View(consoleVersion);
         }
 
-        // GET: Games/Delete/5
+        // GET: ConsoleVersions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,31 +131,31 @@ namespace Shop_Project.Controllers
                 return NotFound();
             }
 
-            var game = await _context.Game
-                .Include(g => g.Console)
+            var consoleVersion = await _context.ConsoleVersion
+                .Include(c => c.Console)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (game == null)
+            if (consoleVersion == null)
             {
                 return NotFound();
             }
 
-            return View(game);
+            return View(consoleVersion);
         }
 
-        // POST: Games/Delete/5
+        // POST: ConsoleVersions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var game = await _context.Game.FindAsync(id);
-            _context.Game.Remove(game);
+            var consoleVersion = await _context.ConsoleVersion.FindAsync(id);
+            _context.ConsoleVersion.Remove(consoleVersion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool GameExists(int id)
+        private bool ConsoleVersionExists(int id)
         {
-            return _context.Game.Any(e => e.Id == id);
+            return _context.ConsoleVersion.Any(e => e.Id == id);
         }
     }
 }

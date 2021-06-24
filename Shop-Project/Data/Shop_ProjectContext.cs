@@ -26,6 +26,8 @@ namespace Shop_Project.Data
 
         public DbSet<Shop_Project.Models.User> User { get; set; }
 
+        public DbSet<Shop_Project.Models.ConsoleVersion> ConsoleVersion { get; set; }
+
 
     }
 }
