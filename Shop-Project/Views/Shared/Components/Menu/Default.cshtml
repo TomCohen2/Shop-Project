@@ -5,9 +5,9 @@
         @foreach (var console in Model)
         {
             <div class="dropdown">
-                <button type="button" class="btn dropdown-toggle bottonbgM" data-toggle="dropdown">
+                <label type="button" class="btn dropdown-toggle bottonbgM"  data-toggle="dropdown" >
                     @console.Name
-                </button>
+                </label>          
                 <div class="dropdown-menu dropbg">
                     <a class="nav-link navcolor" asp-area="" asp-controller="Consoles"
                        asp-action="GamePage" asp-route-id="@console.Id"><b>Games</b></a>

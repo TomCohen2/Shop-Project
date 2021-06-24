@@ -16,7 +16,14 @@
 .bottonbgM{
     background-color: none;
     color:darkslategrey;
+
 }
+    .bottonbgM:focus{
+        outline: 0 !important;
+        border: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+    }
 .dropbg {
     background-image: url(images/vrSnipped2.JPG);
     background-size: cover;

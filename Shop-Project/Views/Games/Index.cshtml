@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 <head>
-    <link rel="stylesheet" href="~/css/mahtel.css" />
+    <link rel="stylesheet" href="mahtel.css">
     <h4 class="white">Games in stock</h4>
 </head>
 
@@ -22,7 +22,9 @@
             </a>
             <div class="card-body">
                 <h4 class="card-title textsize14">@Html.DisplayFor(modelItem => item.Name)</h4>
-                <p class="card-text textsize10">for: @Html.DisplayFor(modelItem => item.Console.Name)</p>
+                <p class="card-text textsize10"><b>@Html.DisplayFor(modelItem => item.Console.Name) ONLEY!</b> </p>                
+                <br />
+                <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
                 <a class="btn btn-primary detailbtncolor" asp-action="Details" asp-route-id="@item.Id">More Details</a>
             </div>
         </div>
@@ -32,15 +34,16 @@
 <style>
 
     .detailbtncolor {
-        border-color: #9ab80b;
-        background-color: #9ab80b;
+        border-color: #B7D153;
+        background-color: #90ac0a;
         display: block;
         left: 50%;
     }
 
         .detailbtncolor:hover {
             border-color: #90ac0a;
-            background-color: #90ac0a;
+            background-color: #B7D153;
+            color: #000000;
         }
 
     .textsize14 {
@@ -51,7 +54,9 @@
     .textsize10 {
         font-size: 10px;
     }
-
+    .textsize12 {
+        font-size: 12px;
+    }
     .mycontainer {
         width: 100%;
     }

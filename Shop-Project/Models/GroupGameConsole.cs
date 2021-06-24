@@ -8,17 +8,17 @@ namespace Shop_Project.Models
 {
     public class GroupGameConsole
     {
-
-
+        [Key]
+        public int Id { get; set; }
 
         [DataType(DataType.ImageUrl)]
         public String Image { get; set; }
 
+      
         public string Name { get; set; }
-
-        public double Price { get; set; }
-
-       public List<Genre> Genres { get; set; }
+        [DataType(DataType.Currency)]
+        public float Price { get; set; }
+        public List<Genre> Genres { get; set; }
 
 
     }

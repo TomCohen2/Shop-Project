@@ -71,19 +71,43 @@ namespace Shop_Project.Controllers
             return View(console);
         }
 
+        public async Task<IActionResult> AllConsoleCollectionPage(int? id)
+        {
+            IEnumerable<GroupGameConsole> sorted =
+                              from a in _context.Game
+                              where (a.ConsoleId == id)
+                              group a by new
+                              {
 
+                                  a.Name,
+                                  a.Price,
+                                  a.Image,
+
+                              } into k
+                              select new GroupGameConsole
+                              {
+                                  Name = k.Key.Name,
+                                  Price = k.Key.Price,
+                                  Image = k.Key.Image,
+                              };
+
+            return View(sorted.ToList());
+
+        }
         public async Task<IActionResult> GamePage(int? id)
         {
             IEnumerable<GroupGameConsole> sorted =
                               from a in _context.Game where(a.ConsoleId == id)
                               group a by new
                               {
+                                  a.Id,
                                   a.Name,
                                   a.Price,
                                   a.Image,
 
                               } into k select new GroupGameConsole
                               {
+                                  Id = k.Key.Id,
                                   Name = k.Key.Name,
                                   Price = k.Key.Price,
                                   Image= k.Key.Image,
