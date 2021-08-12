@@ -24,12 +24,16 @@ namespace Shop_Project.Models
         [DataType(DataType.Currency)] 
         public float Price { get; set; }
 
+
+
+
         public String trailer { get; set; }
 
         //     [Required(ErrorMessage = "You must input quantity")]
         [Range(0, 100)]
         [Display(Name = "Left in stock")]
         public int Quantity { get; set; }
+
 
         public String Description { get; set; }
 

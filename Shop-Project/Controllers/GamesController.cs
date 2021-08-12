@@ -59,19 +59,14 @@ namespace Shop_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId,Genre")] Game game, Genre genre)
+        public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId,Genre")] Game game, int[] Genres)
 
         {
             if (ModelState.IsValid)
             {
 
-                
-
-                //var existingSkillIds = teacher.skills.Select(m => m.Id);
-                //db.Skills.Where(m => model.skillIds.Exclude(existingSkillIds).Contains(m.Id))
-                //    .ToList().ForEach(skill => teacher.skills.Add(skill));
-
-                //  var q = game.Genres.Select(m => m.Name);
+                game.Genres = new List<Genre>();
+                game.Genres.AddRange(_context.Genre.Where(x => Genres.Contains(x.Id)));
                 _context.Add(game);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -90,6 +85,7 @@ namespace Shop_Project.Controllers
             }
 
             var game = await _context.Game.FindAsync(id);
+
             if (game == null)
             {
                 return NotFound();
@@ -104,17 +100,23 @@ namespace Shop_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId,Genre")] Game game, Genre genre)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId,Genres")] Game game, int[] Genres)
         {
             if (id != game.Id)
             {
                 return NotFound();
             }
 
+
             if (ModelState.IsValid)
             {
                 try
                 {
+
+                    game.Genres = new List<Genre>();
+                    
+                    game.Genres.AddRange(_context.Genre.Where(x => Genres.Contains(x.Id)));
+                    //_context.Add(game);
                     _context.Update(game);
                     await _context.SaveChangesAsync();
                 }
@@ -135,7 +137,6 @@ namespace Shop_Project.Controllers
             ViewData["ConsoleId"] = new SelectList(_context.Console, nameof(Console.Id), nameof(Console.Name), game.ConsoleId);
             return View(game);
         }
-
         // GET: Games/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

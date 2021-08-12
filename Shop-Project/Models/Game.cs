@@ -21,13 +21,13 @@ namespace Shop_Project.Models
    //     [Display(Name = "Date Of Release")]
         public DateTime DateOfRelease { get; set; }
 
-   //     [Required(ErrorMessage = "You must input game price")]
+        [Required(ErrorMessage = "You must input game price")]
         [DataType(DataType.Currency)]
         public float Price { get; set; }
 
         public String trailer { get; set; }
 
-   //     [Required(ErrorMessage = "You must input quantity")]
+        [Required(ErrorMessage = "You must input quantity")]
         [Range(0, 100)]
         [Display(Name = "Left in stock")]
         public int Quantity { get; set; }
