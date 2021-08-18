@@ -125,14 +125,19 @@ namespace Shop_Project.Controllers
                               where (a.ConsoleId == id)
                               group a by new
                               {
+                                  a.Id,
                                   a.Name,
                                   a.Price,
+                                  a.Image,
 
                               } into k
                               select new GroupGameConsole
                               {
                                   Name = k.Key.Name,
                                   Price = k.Key.Price,
+                                  Image = k.Key.Image,
+                                  Id = k.Key.Id,
+
                               };
 
             return View(sorted.ToList());

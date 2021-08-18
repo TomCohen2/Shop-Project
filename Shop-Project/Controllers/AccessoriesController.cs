@@ -22,11 +22,8 @@ namespace Shop_Project.Controllers
         // GET: Accessories
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Accessory.ToListAsync());
-        }
-        public async Task<IActionResult> Search(string search)
-        {
-            return View("index", await _context.Accessory.Where(a => a.Name.Contains(search)).ToListAsync());
+            var shop_ProjectContext = _context.Accessory.Include(a => a.Console);
+            return View(await shop_ProjectContext.ToListAsync());
         }
 
         // GET: Accessories/Details/5
@@ -38,6 +35,7 @@ namespace Shop_Project.Controllers
             }
 
             var accessory = await _context.Accessory
+                .Include(a => a.Console)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (accessory == null)
             {
@@ -50,6 +48,7 @@ namespace Shop_Project.Controllers
         // GET: Accessories/Create
         public IActionResult Create()
         {
+            ViewData["ConsoleId"] = new SelectList(_context.Console, "Id", "Name");
             return View();
         }
 
@@ -58,7 +57,7 @@ namespace Shop_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description")] Accessory accessory)
+        public async Task<IActionResult> Create([Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId")] Accessory accessory)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +65,7 @@ namespace Shop_Project.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ConsoleId"] = new SelectList(_context.Console, "Id", "Name", accessory.ConsoleId);
             return View(accessory);
         }
 
@@ -82,6 +82,7 @@ namespace Shop_Project.Controllers
             {
                 return NotFound();
             }
+            ViewData["ConsoleId"] = new SelectList(_context.Console, "Id", "Name", accessory.ConsoleId);
             return View(accessory);
         }
 
@@ -90,7 +91,7 @@ namespace Shop_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description")] Accessory accessory)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Image,Name,DateOfRelease,Price,trailer,Quantity,Description,ConsoleId")] Accessory accessory)
         {
             if (id != accessory.Id)
             {
@@ -117,6 +118,7 @@ namespace Shop_Project.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ConsoleId"] = new SelectList(_context.Console, "Id", "Name", accessory.ConsoleId);
             return View(accessory);
         }
 
@@ -129,6 +131,7 @@ namespace Shop_Project.Controllers
             }
 
             var accessory = await _context.Accessory
+                .Include(a => a.Console)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (accessory == null)
             {
