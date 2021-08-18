@@ -27,6 +27,12 @@ namespace Shop_Project.Controllers
             return View(await shop_ProjectContext.ToListAsync());
         }
 
+        public async Task<IActionResult> Front()
+        {
+            var shop_ProjectContext = _context.Game.Include(g => g.Console).Include(g => g.Genres);
+            return View(await shop_ProjectContext.ToListAsync());
+        }
+
         // GET: Games/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -84,7 +90,10 @@ namespace Shop_Project.Controllers
                 return NotFound();
             }
 
-            var game = await _context.Game.FindAsync(id);
+           // var game = await _context.Game.FindAsync(id);
+            var game = await _context.Game
+                .Include(g => g.Console).Include(g => g.Genres)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (game == null)
             {
@@ -107,17 +116,19 @@ namespace Shop_Project.Controllers
                 return NotFound();
             }
 
-
             if (ModelState.IsValid)
             {
                 try
                 {
-
-                    game.Genres = new List<Genre>();
-                    
-                    game.Genres.AddRange(_context.Genre.Where(x => Genres.Contains(x.Id)));
+                    //game.Genres = new List<Genre>();
+                    var g = await _context.Game
+                        .Include(g => g.Console).Include(g => g.Genres)
+                        .FirstOrDefaultAsync(m => m.Id == id);
+                    int size = g.Genres.Count();
+                    g.Genres.RemoveRange(0, size);
+                    g.Genres.AddRange(_context.Genre.Where(x => Genres.Contains(x.Id)));
                     //_context.Add(game);
-                    _context.Update(game);
+                    _context.Update(g);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -131,10 +142,13 @@ namespace Shop_Project.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+               return RedirectToAction(nameof(Index));
+           
             }
             ViewData["Genres"] = new SelectList(_context.Genre, nameof(Genre.Id), nameof(Genre.Name), game.Genres);
             ViewData["ConsoleId"] = new SelectList(_context.Console, nameof(Console.Id), nameof(Console.Name), game.ConsoleId);
+
+
             return View(game);
         }
         // GET: Games/Delete/5

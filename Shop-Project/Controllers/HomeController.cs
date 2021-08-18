@@ -19,6 +19,14 @@ namespace Shop_Project.Controllers
             _logger = logger;
         }
 
+
+        public IActionResult HomePage()
+        {
+            return View();
+        }
+
+
+
         [Authorize]
         public IActionResult Index()
         {

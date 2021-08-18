@@ -120,9 +120,11 @@ namespace Shop_Project.Controllers
 
         public async Task<IActionResult> AccessoryPage(int? id)
         {
+            Genre g = _context.Genre.Where(a => a.Name.Equals("Accessories")).FirstOrDefault();
+
             IEnumerable<GroupGameConsole> sorted =
-                              from a in _context.Accessory
-                              where (a.ConsoleId == id)
+                              from a in _context.Game
+                              where (a.ConsoleId == id && a.Genres.Contains(g))
                               group a by new
                               {
                                   a.Id,
@@ -139,6 +141,7 @@ namespace Shop_Project.Controllers
                                   Id = k.Key.Id,
 
                               };
+
 
             return View(sorted.ToList());
 
