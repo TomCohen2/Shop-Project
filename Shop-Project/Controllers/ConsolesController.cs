@@ -186,24 +186,11 @@ namespace Shop_Project.Controllers
         public async Task<IActionResult> AccessoryPage(int? id)
         {
             Genre g = _context.Genre.Where(a => a.Name.Equals("Accessories")).FirstOrDefault();
-
-            IEnumerable<GroupGameConsole> sorted =
-                              from a in _context.Game
-                              where (a.ConsoleId == id && a.Genres.Contains(g))
-                              group a by new
-                              {
-                                  a.Name,
-                                  a.Price,
-
-                              } into k
-                              select new GroupGameConsole
-                              {
-                                  Name = k.Key.Name,
-                                  Price = k.Key.Price,
-                              };
+            List<Game> games = new List<Game>();
+            games.Add(_context.Game.Where(a => a.Genres.Contains(g)).FirstOrDefault());
 
 
-            return View(sorted.ToList());
+            return View(games);
 
         }
 

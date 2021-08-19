@@ -76,7 +76,7 @@ namespace Shop_Project
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Games}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=HomePage}/{id?}");
             });
         }
     }

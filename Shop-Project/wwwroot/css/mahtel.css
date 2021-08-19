@@ -1,31 +1,62 @@
-﻿.bgM {
-    background-image: url(images/EL1.jpg);
+﻿
+.bgM {
+    background-image: url(../images/1567665.png);
     background-size: cover;
     background-position: center;
 }
-.navbg {
-    background-image: url(images/headlinetest1.jpg);
-    background-size: cover;
-    background-position: center;
-}
+
 .mainNavbg {
     background-image: url(images/redHbgjpg.jpg);
     background-size: cover;
     background-position: center;
 }
-.bottonbgM{
-    background-color: none;
-    color:darkslategrey;
 
+.navbg {
+    background-image: url(images/redHbgjpg.jpg);
+    background-size: cover;
+    color: white;
+    font-size: 1.3em;
+    font-weight: bold;
+    line-height: 40px;
 }
-    .bottonbgM:focus{
+
+.bottonbgM {
+    color: inherit;
+}
+
+    .bottonbgM:focus {
         outline: 0 !important;
         border: none !important;
         -webkit-box-shadow: none !important;
         box-shadow: none !important;
     }
-.dropbg {
-    background-image: url(images/vrSnipped2.JPG);
+
+    .bottonbgM:hover {
+        color: inherit;
+    }
+
+
+.navbg .dropdown {
+    width: 100%;
+}
+    .dropbg {
+    background-image: url(images/redHbgjpg.jpg);
     background-size: cover;
     background-position: left;
+}
+
+#gameList .card {
+    transition: transform .5s;
+    position: relative;
+    background-color: #adb5bd;
+}
+
+#gameList .card:hover {
+    z-index: 9;
+    transform: scale(1.1);
+}
+
+.navcolor2{
+    color: white;
+    padding-left:0;
 }

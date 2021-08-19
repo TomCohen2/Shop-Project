@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Shop_Project.Data;
 using Shop_Project.Models;
 
 namespace Shop_Project.Controllers
@@ -13,16 +14,34 @@ namespace Shop_Project.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly Shop_ProjectContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, Shop_ProjectContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
 
         public IActionResult HomePage()
         {
-            return View();
+
+            List<Game> games = new List<Game>();
+            foreach (Game g in _context.Game)
+            {
+                games.Add(g);
+            }
+            List<Models.ConsoleVersion> consoles = new List<Models.ConsoleVersion>();
+            foreach(Models.ConsoleVersion c in _context.ConsoleVersion)
+            {
+                consoles.Add(c);
+            }
+            ProductConsole productConsole = new ProductConsole
+            {
+                Games = games,
+                Consoles = consoles
+            };
+            return View(productConsole);
         }
 
 
