@@ -125,17 +125,6 @@ namespace Shop_Project.Controllers
                       int size = g.Genres.Count();
                     g.Genres.RemoveRange(0, size);
                     g.Genres.AddRange(_context.Genre.Where(x => Genres.Contains(x.Id)));
-                    
-                /*    List<Genre> genreList = new List<Genre>();
-                    foreach(int a in Genres)
-                    {
-                        foreach(Genre b in _context.Genre)
-                        {
-                            if(b.Id == a)
-                                genreList.Add(b);
-                        }
-                    }
-                    game.Genres = genreList;*/
                     _context.Update(g);
                     await _context.SaveChangesAsync();
                 }

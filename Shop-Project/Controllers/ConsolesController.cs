@@ -106,8 +106,9 @@ namespace Shop_Project.Controllers
             g.Remove(genre);
             var console = from a in _context.Console
                           where (a.Id == id)
-                          select a.Name;
-            String con = console.FirstOrDefault();
+                          select a;
+            var idd = console.FirstOrDefault().Id;
+            String con = console.FirstOrDefault().Name;
             List<Game> g2 = new List<Game>();
             g2.AddRange(_context.Game.Where(a => a.Console.Name.Contains(con) && !a.Genres.Contains(genre)));
 
@@ -115,7 +116,8 @@ namespace Shop_Project.Controllers
                                             select new GroupGameGenre
                                             {
                                                 Games = g2,
-                                                Genres = g
+                                                Genres = g,
+                                                ConsoleId = idd
                                             };
             return View(r);
 
@@ -165,19 +167,21 @@ namespace Shop_Project.Controllers
                                                     select new GroupGameGenre
                                                     {
                                                         Genres = g,
-                                                        Games = g3
+                                                        Games = g3,
+                                                        ConsoleId = id
                                                     };
                     return View("GamePage", r);
                 }
             }
 
             IEnumerable<GroupGameGenre> r2 = from a in _context.Game
-                                            select new GroupGameGenre
-                                            {
-                                                Genres = g,
-                                                Games = g2
+                                             select new GroupGameGenre
+                                             {
+                                                 Genres = g,
+                                                 ConsoleId = id,
+                                                 Games = new List<Game>()
                                             };
-           
+
             return View("GamePage",r2);
 
         }

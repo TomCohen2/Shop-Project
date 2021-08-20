@@ -4,8 +4,9 @@
 
 
 
-@{var model = Model.FirstOrDefault();
-    var id2 = model.Games.FirstOrDefault().ConsoleId;}
+@{
+    var model = Model.FirstOrDefault();
+    var id2 = model.ConsoleId;}
 <body>
     <div class="container-fluid">
         <div class="row">
@@ -33,13 +34,15 @@
 
                     <div id="gameList" class="container mt-3">
                         <div class="row">
-                            
-                            @foreach (var item in model.Games)
+                            @if (model.Games.Count() > 0)
                             {
+
+                                foreach (var item in model.Games)
+                                {
                                 <div class="col-3 p-1">
                                     <div class="card">
 
-                                        <a href="@Url.Action("Details","Games",new { id = item.Id })">
+                                        <a href="@Url.Action("Details", "Games", new { id = item.Id })">
                                             <img class="btn card-img-top" style="height:220px" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image">
                                         </a>
                                         <div class="card-body">
@@ -47,10 +50,11 @@
                                             <p class="card-text textsize10"><b>@Html.DisplayFor(modelItem => item.Console.Name) ONLY!</b> </p>
                                             <br />
                                             <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
-                                            <a class="btn btn-primary detailbtncolor" asp-action="Details" asp-route-id="@item.Id">More Details</a>
+                                            <a class="btn btn-primary detailbtncolor" asp-controller="Games" asp-action="Details" asp-route-id="@item.Id">More Details</a>
                                         </div>
                                     </div>
                                 </div>
+                                }
                             }
                         </div>
                     </div>
