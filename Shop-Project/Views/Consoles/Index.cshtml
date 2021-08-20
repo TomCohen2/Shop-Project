@@ -4,19 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-white">Index</h1>
 
-<h2>
+<h2 class="text-white">
     <form asp-action="Search" asp-controller="Consoles">
         <input name="searchId" placeholder="search.." value="4" />
         <input name="search" placeholder="search.." value="ps5" hidden />
         <input type="submit" value="ps5" class="btn btn-primary" />
     </form>
 </h2>
-<p>
+<p class="text-white">
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table text-white">
     <thead>
         <tr>
             <th>

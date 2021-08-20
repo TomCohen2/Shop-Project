@@ -12,19 +12,20 @@
             <div class="col-lg-2">
                 <form asp-action="GamePage">
                     <input name="id" value="@id2" hidden />
+                    <h3 class=" text-white">Genre Filter</h3>
                     @foreach (var genre in model.Genres)
                     {
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="@genre.Name" name="Genre" value="@genre.Name" />
-                            <label class="custom-control-label" for="@Html.DisplayFor(modelitem => genre.Name)">
-                                @Html.DisplayFor(modelitem => genre.Name)
-                            </label>
-                        </div>
-                    </li>
-                </ul>}
-                    <input type="submit" value="submit" class="btn btn-primary" />
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input" id="@genre.Name" name="Genre" value="@genre.Name" />
+                                    <label class="custom-control-label" for="@Html.DisplayFor(modelitem => genre.Name)">
+                                        @Html.DisplayFor(modelitem => genre.Name)
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>}
+                    <input type="submit" value="Filter" class="btn btn-primary detailbtncolor px-5" />
                 </form>
             </div>
             <div class="col-lg-9">
@@ -32,6 +33,7 @@
 
                     <div id="gameList" class="container mt-3">
                         <div class="row">
+                            
                             @foreach (var item in model.Games)
                             {
                                 <div class="col-3 p-1">
@@ -55,7 +57,7 @@
                 </div>
             </div>
         </div>
-
+    </div>
 </body>
 
 <style>
@@ -85,5 +87,4 @@
     .mycontainer {
         width: 100%;
     }
-
 </style>

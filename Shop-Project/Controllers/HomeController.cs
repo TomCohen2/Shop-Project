@@ -14,37 +14,11 @@ namespace Shop_Project.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly Shop_ProjectContext _context;
 
-        public HomeController(ILogger<HomeController> logger, Shop_ProjectContext context)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _context = context;
         }
-
-
-        public IActionResult HomePage()
-        {
-
-            List<Game> games = new List<Game>();
-            foreach (Game g in _context.Game)
-            {
-                games.Add(g);
-            }
-            List<Models.ConsoleVersion> consoles = new List<Models.ConsoleVersion>();
-            foreach(Models.ConsoleVersion c in _context.ConsoleVersion)
-            {
-                consoles.Add(c);
-            }
-            ProductConsole productConsole = new ProductConsole
-            {
-                Games = games,
-                Consoles = consoles
-            };
-            return View(productConsole);
-        }
-
-
 
         [Authorize]
         public IActionResult Index()

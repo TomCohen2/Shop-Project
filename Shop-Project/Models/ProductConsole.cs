@@ -10,5 +10,7 @@ namespace Shop_Project.Models
         public int Id { get; set; }
         public List<Game> Games { get; set; }
         public List<ConsoleVersion> Consoles { get; set; }
+        public List<Genre> Genres { get; set; }
+        public List<Console> ConsolesName { get; set; }
     }
 }
