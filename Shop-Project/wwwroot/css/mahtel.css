@@ -1,6 +1,6 @@
 ﻿
 .bgM {
-    background-image: url(../images/1567665.png);
+    background-image: url(../images/blackBg.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -62,7 +62,7 @@
 #gameList .card {
     transition: transform .5s;
     position: relative;
-    background-image: url(../images/2586730.jpg);
+    background-image: url(../images/shayred.jpg);
     background-size: cover;
 }
 
@@ -83,3 +83,77 @@
     color: white;
     padding-left:0;
 }
+.artbg {
+    background-image: url(../images/vrHandsSnipped.JPG);
+    background-size: cover;
+    background-position: left;
+}
+.detailbtncolor {
+    border-color: #B7D153;
+    background-color: #90ac0a;
+    display: block;
+    left: 50%;
+}
+
+    .detailbtncolor:hover {
+        border-color: #90ac0a;
+        background-color: #B7D153;
+        color: #000000;
+    }
+    .center{
+        text-align:center;
+    }
+.detailbtncolor1 {
+    border-color: #B7D153;
+    background-color: #90ac0a;
+    display: block;
+    width:100px;
+    left:50%;
+    margin:auto;
+    /*left: 50%;*/
+    
+}
+
+    .detailbtncolor1:hover {
+        border-color: #90ac0a;
+        background-color: #B7D153;
+        color: #000000;
+    }
+/* Set the size of the div element that contains the map */
+#map {   
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+    float:left;
+    display:inline-block;
+}
+/*.textbox{
+    padding-left:5px;
+    display:inline-block;
+    height:400px;
+    width:100%;
+    float:right;
+    font-size:14px;
+}*/
+.img-container {
+    text-align: center;
+}
+
+
+    .img-container .map,
+    .img-container .textbox {
+        color: #B7D153;
+        display: inline-block;
+        padding: 10px;
+        padding-left: 20px;
+    }
+
+    .img-container .map {
+        padding-top: 4px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+   .img-container .textred{
+        color:#b01014
+    }
