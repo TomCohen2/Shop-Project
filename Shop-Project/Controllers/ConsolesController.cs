@@ -28,6 +28,11 @@ namespace Shop_Project.Controllers
             return View(await _context.Console.ToListAsync());
         }
 
+        public async Task<IActionResult> Cart()
+        {
+            return View(await _context.Console.ToListAsync());
+        }
+
         // GET: Consoles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -97,8 +102,9 @@ namespace Shop_Project.Controllers
         }
         public async Task<IActionResult> GamePage(int? id)
         {
+            Genre g = _context.Genre.Where(a => a.Name.Equals("Accessories")).FirstOrDefault();
             IEnumerable<GroupGameConsole> sorted =
-                              from a in _context.Game where(a.ConsoleId == id)
+                              from a in _context.Game where(a.ConsoleId == id && !(a.Genres.Contains(g)))
                               group a by new
                               {
                                   a.Id,
