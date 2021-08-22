@@ -1,0 +1,254 @@
+﻿@model IEnumerable<Shop_Project.Models.ProductConsole>
+
+@{
+    ViewData["Title"] = "HomePage";
+}
+
+<head>
+    <link rel="stylesheet" href="mahtel.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <style>
+        /* Make the image fully responsive */
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container mt-3">
+        <div id="myCarousel" class="carousel slide row">
+
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+                <li class="item1 active" data-position="0"></li>
+                <li class="item2" data-position="1"></li>
+                <li class="item3" data-position="2"></li>
+                <li class="item4" data-position="3"></li>
+                <li class="item5" data-position="4"></li>
+                <li class="item6" data-position="5"></li>
+                <li class="item7" data-position="6"></li>
+            </ul>
+
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/images/darksouls.jpg" alt=" dark souls img" width="1100" height="500">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/images/deathstroke.jpg" alt="death stroke img" width="1100" height="500">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/images/doom.jpg" alt="doom img" width="1100" height="500">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/images/god of war 4.jpg" alt="god of war 4 img" width="1100" height="500">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/images/joker.jpg" alt="joker img" width="1100" height="500">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/images/starwars.jpg" alt="star wars img" width="1100" height="500">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/images/witcher.jpg" alt="witcher img" width="1100" height="500">
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#myCarousel">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+    </div>
+    @{var model = Model.FirstOrDefault(); }
+
+    <br />
+    <br />
+
+    <form asp-action="Search" class="text-center text-sm-left">
+        <a class="nav justify-content-center">
+
+            <input name="searchId" placeholder="search.." />
+            <input type="submit" value="Search" class="btn btn-primary detailbtncolor " />
+        </a>
+    </form>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2">
+                <form asp-action="HomePage">
+                    <h3 class=" text-white">Product Filter</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" id="All" name="All" value="All" />
+                                <label class="custom-control-label" for="All">
+                                    All
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" id="Games" name="Games" value="Games" />
+                                <label class="custom-control-label" for="Games">
+                                    Games
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                    @foreach (var console in model.ConsolesName)
+                    {
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input" id="@console.Name" name="Console" value="@console.Name" />
+                                    <label class="custom-control-label" for="@Html.DisplayFor(modelitem => console.Name)">
+                                        @Html.DisplayFor(modelitem => console.Name)
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>}
+                    @foreach (var genre in model.Genres)
+                    {
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input" id="@genre.Name" name="Genre" value="@genre.Name" />
+                                    <label class="custom-control-label" for="@Html.DisplayFor(modelitem => genre.Name)">
+                                        @Html.DisplayFor(modelitem => genre.Name)
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>}
+                    <input type="submit" value="Filter" class="btn btn-primary detailbtncolor" />
+                </form>
+            </div>
+            <div class="col-lg-9">
+                <div class="text-center">
+
+
+                    <div id="gameList" class="container mt-3">
+                        <div class="row">
+                            @if (model.Games.Count() > 0)
+                            {
+                                foreach (var item in model.Games)
+                                {
+                                    <div class="col-3 p-1">
+                                        <div class="card">
+                                            <a href="@Url.Action("Details", "Games", new { id = item.Id })">
+                                                <img class="btn card-img-top" style="height:220px" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image">
+                                            </a>
+                                            <div class="card-body">
+                                                <h4 class="card-title textsize14">@Html.DisplayFor(modelItem => item.Name)</h4>
+                                                <p class="card-text textsize10"><b>@Html.DisplayFor(modelItem => item.Console.Name) ONLY!</b> </p>
+                                                <br />
+                                                <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
+                                                <a class="btn btn-primary detailbtncolor" asp-controller="Games" asp-action="Details" asp-route-id="@item.Id">More Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            <br />
+                            @if (model.Consoles.Count() > 0)
+                            {
+                                foreach (var item in model.Consoles)
+                                {
+                                    <div class="col-3 p-1">
+                                        <div class="card">
+
+                                            <a href="@Url.Action("Details", "ConsoleVersions", new { id = item.Id })">
+                                                <img class="btn card-img-top" style="height:220px" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image">
+                                            </a>
+                                            <div class="card-body">
+                                                <h4 class="card-title textsize14">@Html.DisplayFor(modelItem => item.Name)</h4>
+                                                <p class="card-text textsize10"><b> </b> </p>
+                                                <br />
+                                                <br />
+                                                <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
+                                                <a class="btn btn-primary detailbtncolor" asp-controller="ConsoleVersions" asp-action="Details" asp-route-id="@item.Id">More Details</a>
+                                            </div>
+                                        </div>
+                                    </div>}
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+<script>
+    $(document).ready(function () {
+        const $carousel = $("#myCarousel");
+        // Activate Carousel
+        $carousel.carousel();
+
+        // Enable Carousel Indicators
+        $(".carousel-indicators li").click(function () {
+            const position = $(this).data('position');
+            $carousel.carousel(position);
+        })
+      3
+        // Enable Carousel Controls
+        $(".carousel-control-prev").click(function () {
+            $("#myCarousel").carousel("prev");
+        });
+        $(".carousel-control-next").click(function () {
+            $("#myCarousel").carousel("next");
+        });
+    });
+</script>
+
+
+<style>
+
+    .detailbtncolor {
+        border-color: #B7D153;
+        background-color: #90ac0a;
+        display: block;
+        left: 50%;
+    }
+
+        .detailbtncolor:hover {
+            border-color: #90ac0a;
+            background-color: #B7D153;
+            color: #000000;
+        }
+
+    .textsize14 {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .textsize10 {
+        font-size: 10px;
+    }
+
+    .textsize12 {
+        font-size: 12px;
+    }
+
+    .mycontainer {
+        width: 100%;
+    }
+
+    .mycard {
+        background: none;
+        display: inline-block;
+    }
+</style>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Shop_Project.Data;
 using Shop_Project.Models;
 
 namespace Shop_Project.Controllers
@@ -18,14 +19,6 @@ namespace Shop_Project.Controllers
         {
             _logger = logger;
         }
-
-
-        public IActionResult HomePage()
-        {
-            return View();
-        }
-
-
 
         [Authorize]
         public IActionResult Index()

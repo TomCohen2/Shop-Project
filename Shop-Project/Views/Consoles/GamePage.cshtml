@@ -1,1 +1,94 @@
-﻿@model IEnumerable<GroupGameConsole>@{ ViewData["Title"] = "GroupBy";}@foreach (var group in Model){<div class="card mycard" style="width:200px">    <a href="@Url.Action("Details","Games",new { id = group.Id })">        <img class="btn card-img-top" style="height:220px" src="@Html.DisplayFor(modelItem => group.Image)" alt="Card image">    </a>    <div class="card-body">        <h4 class="card-title textsize14">@Html.DisplayFor(modelItem => group.Name)</h4>        <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => group.Price)</b></p>        <a class="btn btn-primary detailbtncolor" asp-controller="Games" asp-action="Details" asp-route-id="@group.Id">More Details</a>    </div></div> }<style>    .detailbtncolor {        border-color: #B7D153;        background-color: #90ac0a;        display: block;        left: 50%;    }        .detailbtncolor:hover {            border-color: #90ac0a;            background-color: #B7D153;            color: #000000;        }    .textsize14 {        font-size: 14px;        font-weight: bold;    }    .textsize12 {        font-size: 12px;    }    .mycontainer {        width: 100%;    }    .mycard {        background: none;        display: inline-block;    }</style>
+﻿@model IEnumerable<Shop_Project.Models.GroupGameGenre>
+
+@{ ViewData["Title"] = "GamePage"; }
+
+
+
+@{
+    var model = Model.FirstOrDefault();
+    var id2 = model.ConsoleId;}
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2">
+                <form asp-action="GamePage">
+                    <input name="id" value="@id2" hidden />
+                    <h3 class=" text-white">Genre Filter</h3>
+                    @foreach (var genre in model.Genres)
+                    {
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input" id="@genre.Name" name="Genre" value="@genre.Name" />
+                                    <label class="custom-control-label" for="@Html.DisplayFor(modelitem => genre.Name)">
+                                        @Html.DisplayFor(modelitem => genre.Name)
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>}
+                    <input type="submit" value="Filter" class="btn btn-primary detailbtncolor px-5" />
+                </form>
+            </div>
+            <div class="col-lg-9">
+                <div class="text-center">
+
+                    <div id="gameList" class="container mt-3">
+                        <div class="row">
+                            @if (model.Games.Count() > 0)
+                            {
+
+                                foreach (var item in model.Games)
+                                {
+                                <div class="col-3 p-1">
+                                    <div class="card">
+
+                                        <a href="@Url.Action("Details", "Games", new { id = item.Id })">
+                                            <img class="btn card-img-top" style="height:220px" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image">
+                                        </a>
+                                        <div class="card-body">
+                                            <h4 class="card-title textsize14">@Html.DisplayFor(modelItem => item.Name)</h4>
+                                            <p class="card-text textsize10"><b>@Html.DisplayFor(modelItem => item.Console.Name) ONLY!</b> </p>
+                                            <br />
+                                            <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
+                                            <a class="btn btn-primary detailbtncolor" asp-controller="Games" asp-action="Details" asp-route-id="@item.Id">More Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<style>
+
+    .detailbtncolor {
+        border-color: #B7D153;
+        background-color: #90ac0a;
+        display: block;
+        left: 50%;
+    }
+
+        .detailbtncolor:hover {
+            border-color: #90ac0a;
+            background-color: #B7D153;
+            color: #000000;
+        }
+
+    .textsize14 {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .textsize12 {
+        font-size: 12px;
+    }
+
+    .mycontainer {
+        width: 100%;
+    }
+</style>
