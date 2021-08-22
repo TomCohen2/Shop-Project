@@ -1,6 +1,6 @@
 ﻿
 .bgM {
-    background-image: url(../images/blackBg.jpg);
+    background-image: url(../images/background/2176.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -58,11 +58,21 @@
     border-bottom-left-radius: 0rem;
 }
 
+.allover {
+    height: 50%;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
 
 #gameList .card {
     transition: transform .5s;
     position: relative;
-    background-image: url(../images/shayred.jpg);
+    background-image: url(../images/558476.jpg);
     background-size: cover;
 }
 
