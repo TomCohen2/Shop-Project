@@ -163,24 +163,20 @@ namespace Shop_Project.Controllers
                 if (g3.Count > 0)
                 {
 
-                    IEnumerable<GroupGameGenre> r = from a in _context.Game
-                                                    select new GroupGameGenre
-                                                    {
-                                                        Genres = g,
-                                                        Games = g3,
-                                                        ConsoleId = id
-                                                    };
-                    return View("GamePage", r);
-                }
-            }
+            IEnumerable<GroupGameConsole> sorted =
+                              from a in _context.Game
+                              where (a.ConsoleId == id && a.Genres.Contains(g))
+                              group a by new
+                              {
+                                  a.Name,
+                                  a.Price,
 
-            IEnumerable<GroupGameGenre> r2 = from a in _context.Game
-                                             select new GroupGameGenre
-                                             {
-                                                 Genres = g,
-                                                 ConsoleId = id,
-                                                 Games = new List<Game>()
-                                            };
+                              } into k
+                              select new GroupGameConsole
+                              {
+                                  Name = k.Key.Name,
+                                  Price = k.Key.Price,
+                              };
 
             return View("GamePage",r2);
 
