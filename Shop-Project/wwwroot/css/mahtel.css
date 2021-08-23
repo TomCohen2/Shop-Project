@@ -1,6 +1,6 @@
 ﻿
 .bgM {
-    background-image: url(../images/background/2176.jpg);
+    background-image: url(../images/whiteBg.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -49,7 +49,7 @@
     .list-group-item:first-child {
     border-top-left-radius: 0rem;
     border-top-right-radius: 0rem;
-    background-image: url(../images/1285953.jpg);
+    background-image: url(../images/558571.png);
     background-size: cover;
 }
 .list-group-item:last-child {
