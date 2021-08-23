@@ -4,22 +4,45 @@
     background-size: cover;
     background-position: center;
 }
-
+.marginLeft10{
+    margin-left:10px;
+}
 .mainNavbg {
     background-image: url(images/redHbgjpg.jpg);
     background-size: cover;
     background-position: center;
 }
+.mainNavbg1 {
+    background-image: url(../images/navbg/blacknav.jpg);
+    background-color: black;
+    background-size: cover;
+    background-position: center;
+}
+.mainNavbgclear {
+    background-color:none;
+    background-size: cover;
+    background-position: center;
+    
+}
 
 .navbg {
-    background-image: url(images/redHbgjpg.jpg);
+    background:linear-gradient(to bottom, rgb(0,183,234), black, transparent);
     background-size: cover;
     color: white;
     font-size: 1.3em;
     font-weight: bold;
     line-height: 40px;
 }
-
+.allover {
+    height:100%%;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top:0;
+}
 .bottonbgM {
     color: inherit;
 }
@@ -40,7 +63,7 @@
     width: 100%;
 }
     .dropbg {
-    background-image: url(images/redHbgjpg.jpg);
+    background-image: url(../images/vrskelatone.jpeg);
     background-size: cover;
     background-position: left;
 }
@@ -58,21 +81,11 @@
     border-bottom-left-radius: 0rem;
 }
 
-.allover {
-    height: 50%;
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-}
-
 
 #gameList .card {
     transition: transform .5s;
     position: relative;
-    background-image: url(../images/558476.jpg);
+    background-image: url(../images/shayred.jpg);
     background-size: cover;
 }
 
@@ -93,10 +106,15 @@
     color: white;
     padding-left:0;
 }
-.artbg {
-    background-image: url(../images/vrHandsSnipped.JPG);
+.artbg1 {
+    background-image: url(../images/shayred2.jpg);
     background-size: cover;
     background-position: left;
+}
+.artbg {
+    background-image: url(../images/GEdenbg/sport4.jpg);
+    background-size: cover;
+    background-position: center;
 }
 .detailbtncolor {
     border-color: #B7D153;
@@ -114,19 +132,18 @@
         text-align:center;
     }
 .detailbtncolor1 {
-    border-color: #B7D153;
-    background-color: #90ac0a;
+    border-color: #306582;
+    background-color: #8eaa87;
     display: block;
-    width:100px;
-    left:50%;
-    margin:auto;
+    width: 200px;
+    left: 50%;
+    margin: auto;
     /*left: 50%;*/
-    
 }
 
     .detailbtncolor1:hover {
-        border-color: #90ac0a;
-        background-color: #B7D153;
+        border-color: #306582;
+        background-color: #34f603;
         color: #000000;
     }
 /* Set the size of the div element that contains the map */
@@ -138,14 +155,6 @@
     float:left;
     display:inline-block;
 }
-/*.textbox{
-    padding-left:5px;
-    display:inline-block;
-    height:400px;
-    width:100%;
-    float:right;
-    font-size:14px;
-}*/
 .img-container {
     text-align: center;
 }
@@ -153,7 +162,7 @@
 
     .img-container .map,
     .img-container .textbox {
-        color: #B7D153;
+        color: black;
         display: inline-block;
         padding: 10px;
         padding-left: 20px;
