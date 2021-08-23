@@ -49,7 +49,7 @@ namespace Shop_Project.Controllers
         // GET: Consoles/Create
         public IActionResult Create()
         {
-            ViewData["Games"] = new SelectList(_context.Game, nameof(Game.Id),nameof(Game.Name));
+            ViewData["Games"] = new SelectList(_context.Game, nameof(Game.Id), nameof(Game.Name));
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace Shop_Project.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["Games"] = new SelectList(_context.Game, nameof(Game.Id),nameof(Game.Name));
+            ViewData["Games"] = new SelectList(_context.Game, nameof(Game.Id), nameof(Game.Name));
             return View(console);
         }
         public async Task<IActionResult> ConsoleVersionPage(int? id)
@@ -141,7 +141,7 @@ namespace Shop_Project.Controllers
             List<Game> g2 = new List<Game>();
             g2.AddRange(_context.Game.Where(a => a.Console.Name.Contains(con)).Include(g => g.Console).Include(g => g.Genres));
             List<Game> g3 = new List<Game>();
-            if (Genre.Count()>0)
+            if (Genre.Count() > 0)
             {
                 List<Genre> genre = new List<Genre>();
                 foreach (String str in Genre)
@@ -163,22 +163,26 @@ namespace Shop_Project.Controllers
                 if (g3.Count > 0)
                 {
 
-            IEnumerable<GroupGameConsole> sorted =
-                              from a in _context.Game
-                              where (a.ConsoleId == id && a.Genres.Contains(g))
-                              group a by new
-                              {
-                                  a.Name,
-                                  a.Price,
+                    IEnumerable<GroupGameGenre> r = from a in _context.Game
+                                                    select new GroupGameGenre
+                                                    {
+                                                        Genres = g,
+                                                        Games = g3,
+                                                        ConsoleId = id
+                                                    };
+                    return View("GamePage", r);
+                }
+            }
 
-                              } into k
-                              select new GroupGameConsole
-                              {
-                                  Name = k.Key.Name,
-                                  Price = k.Key.Price,
-                              };
+            IEnumerable<GroupGameGenre> r2 = from a in _context.Game
+                                             select new GroupGameGenre
+                                             {
+                                                 Genres = g,
+                                                 ConsoleId = id,
+                                                 Games = new List<Game>()
+                                             };
 
-            return View("GamePage",r2);
+            return View("GamePage", r2);
 
         }
 
@@ -202,18 +206,18 @@ namespace Shop_Project.Controllers
                               where (a.Id == id)
                               group a by new
                               {
-                                  a.Name,                                 
+                                  a.Name,
 
                               } into k
                               select new GroupGameConsole
                               {
-                                  Name = k.Key.Name,                                  
+                                  Name = k.Key.Name,
                               };
 
             return View(sorted.ToList());
 
         }
-        public async Task<IActionResult> Search(String searchId,String search)
+        public async Task<IActionResult> Search(String searchId, String search)
         {
             return View("index", await _context.Console.Where(a => a.Name.Contains(search)).ToListAsync());
         }
