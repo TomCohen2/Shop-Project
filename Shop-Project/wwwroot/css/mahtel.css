@@ -1,31 +1,178 @@
-﻿.bgM {
-    background-image: url(images/EL1.jpg);
+﻿
+.bgM {
+    background-image: url(../images/whiteBg.jpg);
     background-size: cover;
     background-position: center;
 }
-.navbg {
-    background-image: url(images/headlinetest1.jpg);
-    background-size: cover;
-    background-position: center;
+.marginLeft10{
+    margin-left:10px;
 }
 .mainNavbg {
     background-image: url(images/redHbgjpg.jpg);
     background-size: cover;
     background-position: center;
 }
-.bottonbgM{
-    background-color: none;
-    color:darkslategrey;
-
+.mainNavbg1 {
+    background-image: url(../images/navbg/blacknav.jpg);
+    background-color: black;
+    background-size: cover;
+    background-position: center;
 }
-    .bottonbgM:focus{
+.mainNavbgclear {
+    background-color:none;
+    background-size: cover;
+    background-position: center;
+    
+}
+
+.navbg {
+    background:linear-gradient(to bottom, rgb(0,183,234), black, transparent);
+    background-size: cover;
+    color: white;
+    font-size: 1.3em;
+    font-weight: bold;
+    line-height: 40px;
+}
+.allover {
+    height:100%%;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top:0;
+}
+.bottonbgM {
+    color: inherit;
+}
+
+    .bottonbgM:focus {
         outline: 0 !important;
         border: none !important;
         -webkit-box-shadow: none !important;
         box-shadow: none !important;
     }
-.dropbg {
-    background-image: url(images/vrSnipped2.JPG);
+
+    .bottonbgM:hover {
+        color: inherit;
+    }
+
+
+.navbg .dropdown {
+    width: 100%;
+}
+    .dropbg {
+    background-image: url(../images/vrskelatone.jpeg);
     background-size: cover;
     background-position: left;
 }
+
+
+    .list-group-item:first-child {
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0rem;
+    background-image: url(../images/1285953.jpg);
+    background-size: cover;
+}
+.list-group-item:last-child {
+
+    border-bottom-right-radius: 0rem;
+    border-bottom-left-radius: 0rem;
+}
+
+
+#gameList .card {
+    transition: transform .5s;
+    position: relative;
+    background-image: url(../images/shayred.jpg);
+    background-size: cover;
+}
+
+#gameList .card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    color:white;
+}
+
+
+#gameList .card:hover {
+    z-index: 9;
+    transform: scale(1.1);
+}
+
+.navcolor2{
+    color: white;
+    padding-left:0;
+}
+.artbg1 {
+    background-image: url(../images/shayred2.jpg);
+    background-size: cover;
+    background-position: left;
+}
+.artbg {
+    background-image: url(../images/GEdenbg/sport4.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.detailbtncolor {
+    border-color: #B7D153;
+    background-color: #90ac0a;
+    display: block;
+    left: 50%;
+}
+
+    .detailbtncolor:hover {
+        border-color: #90ac0a;
+        background-color: #B7D153;
+        color: #000000;
+    }
+    .center{
+        text-align:center;
+    }
+.detailbtncolor1 {
+    border-color: #306582;
+    background-color: #8eaa87;
+    display: block;
+    width: 200px;
+    left: 50%;
+    margin: auto;
+    /*left: 50%;*/
+}
+
+    .detailbtncolor1:hover {
+        border-color: #306582;
+        background-color: #34f603;
+        color: #000000;
+    }
+/* Set the size of the div element that contains the map */
+#map {   
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+    float:left;
+    display:inline-block;
+}
+.img-container {
+    text-align: center;
+}
+
+
+    .img-container .map,
+    .img-container .textbox {
+        color: black;
+        display: inline-block;
+        padding: 10px;
+        padding-left: 20px;
+    }
+
+    .img-container .map {
+        padding-top: 4px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+   .img-container .textred{
+        color:#b01014
+    }
