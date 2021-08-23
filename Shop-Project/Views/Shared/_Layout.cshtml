@@ -9,18 +9,18 @@
     <link rel="stylesheet" href="~/css/mahtel.css" />
 </head>
 <body class="bgM">
-    <header>
-        <nav class="navbar navbar-expand-lg mainNavbg">
-            <div class="container">
-                <a class="navbar-brand text-light" href="/">Gaming Shop Project</a>
+    <header >
+        <nav class="navbar navbar-expand-lg mainNavbgclear">
+            <div class="container marginLeft10">
+                <img class="navbar-brand text-dark" width="100" src="~/images/logos/GElogo.JPG"  ></img>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active text-light" aria-current="page" asp-action="Index" asp-controller="Home">Home</a></li>
-                        <li class="nav-item"><a class="nav-link text-light" asp-action="Privacy" asp-controller="Home">Privacy</a></li>
+                        <li class="nav-item"><a class="nav-link active text-dark" aria-current="page" asp-action="Index" asp-controller="Home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" asp-action="Privacy" asp-controller="Home">Privacy</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-light" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">My Account</a>
+                            <a class="nav-link dropdown-toggle text-dark" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">My Account</a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">My Orders</a></li>
                                 <li><a class="dropdown-item" href="#">Shopping Cart</a></li>
@@ -37,7 +37,7 @@
                         {
                             <li class="nav-item"><a class="nav-link active" aria-current="page" asp-action="Login" asp-controller="Users">Login</a></li>
                         }
-                        <li class="nav-item"><a class="nav-link text-light" asp-controller="Games" asp-action="Index" >Games</a></li>                      
+                        <li class="nav-item"><a class="nav-link text-dark" asp-controller="Games" asp-action="Index" >Games</a></li>                      
                     </ul>
                 </div>
             </div>
@@ -47,7 +47,7 @@
         @await Component.InvokeAsync("Menu")
 
     </header>
-    <div class="container" >
+    <div class="container " >
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
