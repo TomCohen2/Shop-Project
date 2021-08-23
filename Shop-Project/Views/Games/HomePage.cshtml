@@ -73,10 +73,9 @@
     <br />
     <br />
 
-    <form asp-action="Search" class="text-center text-sm-left">
+    <form  asp-action="Search" class="text-center text-sm-left">
         <a class="nav justify-content-center">
-
-            <input name="searchId" placeholder="search.." />
+            <input name="searchId" placeholder="search by name..."/>
             <input type="submit" value="Search" class="btn btn-primary detailbtncolor " />
         </a>
     </form>
@@ -167,7 +166,6 @@
                                 {
                                     <div class="col-3 p-1">
                                         <div class="card">
-
                                             <a href="@Url.Action("Details", "ConsoleVersions", new { id = item.Id })">
                                                 <img class="btn card-img-top" style="height:220px" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image">
                                             </a>
