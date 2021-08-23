@@ -58,7 +58,11 @@
         color: inherit;
     }
 
-
+.tabsbg {
+    background-image: url(../images/GEdenbg/GEden13.jpg);
+    background-size: cover;
+    background-position: center;
+}
 .navbg .dropdown {
     width: 100%;
 }
@@ -133,7 +137,8 @@
     }
 .detailbtncolor1 {
     border-color: #306582;
-    background-color: #8eaa87;
+    background-color: none;
+    color:aqua;
     display: block;
     width: 200px;
     left: 50%;
@@ -143,7 +148,7 @@
 
     .detailbtncolor1:hover {
         border-color: #306582;
-        background-color: #34f603;
+        background-color: aqua;
         color: #000000;
     }
 /* Set the size of the div element that contains the map */
