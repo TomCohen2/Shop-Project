@@ -97,53 +97,104 @@ namespace Shop_Project.Controllers
         }
         public async Task<IActionResult> GamePage(int? id)
         {
-            IEnumerable<GroupGameConsole> sorted =
-                              from a in _context.Game where(a.ConsoleId == id)
-                              group a by new
-                              {
-                                  a.Id,
-                                  a.Name,
-                                  a.Price,
-                                  a.Image,
+            List<Genre> g = new List<Genre>();
+            for (int i = 0; i < _context.Genre.Count(); i++)
+            {
+                g.Add(_context.Genre.Where(a => a.Id.Equals(i + 1)).FirstOrDefault());
+            }
+            var genre = _context.Genre.Where(a => a.Name.Contains("Accessories")).FirstOrDefault();
+            g.Remove(genre);
+            var console = from a in _context.Console
+                          where (a.Id == id)
+                          select a;
+            var idd = console.FirstOrDefault().Id;
+            String con = console.FirstOrDefault().Name;
+            List<Game> g2 = new List<Game>();
+            g2.AddRange(_context.Game.Where(a => a.Console.Name.Contains(con) && !a.Genres.Contains(genre)));
 
-                              } into k select new GroupGameConsole
-                              {
-                                  Id = k.Key.Id,
-                                  Name = k.Key.Name,
-                                  Price = k.Key.Price,
-                                  Image= k.Key.Image,
-                              };
-
-            return View(sorted.ToList());
+            IEnumerable<GroupGameGenre> r = from a in _context.Game
+                                            select new GroupGameGenre
+                                            {
+                                                Games = g2,
+                                                Genres = g,
+                                                ConsoleId = idd
+                                            };
+            return View(r);
 
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GamePage(int id, String[] Genre)
+        {
+            List<Genre> g = new List<Genre>();
+            for (int i = 0; i < _context.Genre.Count(); i++)
+            {
+                g.Add(_context.Genre.Where(a => a.Id.Equals(i + 1)).FirstOrDefault());
+            }
+            var genre2 = _context.Genre.Where(a => a.Name.Contains("Accessories")).FirstOrDefault();
+            g.Remove(genre2);
+            var console = from a in _context.Console
+                          where (a.Id == id)
+                          select a.Name;
+            String con = console.FirstOrDefault();
+
+            List<Game> g2 = new List<Game>();
+            g2.AddRange(_context.Game.Where(a => a.Console.Name.Contains(con)).Include(g => g.Console).Include(g => g.Genres));
+            List<Game> g3 = new List<Game>();
+            if (Genre.Count()>0)
+            {
+                List<Genre> genre = new List<Genre>();
+                foreach (String str in Genre)
+                {
+                    genre.Add(_context.Genre.Where(a => a.Name.Contains(str)).FirstOrDefault());
+                }
+                foreach (Game a in g2)
+                {
+                    foreach (Genre b in genre)
+                    {
+                        if (a.Genres.Contains(b))
+                        {
+                            if (!g3.Contains(a))
+                                g3.Add(a);
+                        }
+                    }
+                }
+
+                if (g3.Count > 0)
+                {
+
+                    IEnumerable<GroupGameGenre> r = from a in _context.Game
+                                                    select new GroupGameGenre
+                                                    {
+                                                        Genres = g,
+                                                        Games = g3,
+                                                        ConsoleId = id
+                                                    };
+                    return View("GamePage", r);
+                }
+            }
+
+            IEnumerable<GroupGameGenre> r2 = from a in _context.Game
+                                             select new GroupGameGenre
+                                             {
+                                                 Genres = g,
+                                                 ConsoleId = id,
+                                                 Games = new List<Game>()
+                                            };
+
+            return View("GamePage",r2);
+
+        }
+
 
         public async Task<IActionResult> AccessoryPage(int? id)
         {
             Genre g = _context.Genre.Where(a => a.Name.Equals("Accessories")).FirstOrDefault();
-
-            IEnumerable<GroupGameConsole> sorted =
-                              from a in _context.Game
-                              where (a.ConsoleId == id && a.Genres.Contains(g))
-                              group a by new
-                              {
-                                  a.Id,
-                                  a.Name,
-                                  a.Price,
-                                  a.Image,
-
-                              } into k
-                              select new GroupGameConsole
-                              {
-                                  Name = k.Key.Name,
-                                  Price = k.Key.Price,
-                                  Image = k.Key.Image,
-                                  Id = k.Key.Id,
-
-                              };
+            List<Game> games = new List<Game>();
+            games.Add(_context.Game.Where(a => a.Genres.Contains(g)).FirstOrDefault());
 
 
-            return View(sorted.ToList());
+            return View(games);
 
         }
 
@@ -166,7 +217,7 @@ namespace Shop_Project.Controllers
             return View(sorted.ToList());
 
         }
-        public async Task<IActionResult> Search(string search)
+        public async Task<IActionResult> Search(String searchId,String search)
         {
             return View("index", await _context.Console.Where(a => a.Name.Contains(search)).ToListAsync());
         }

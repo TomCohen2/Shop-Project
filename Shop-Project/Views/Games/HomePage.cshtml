@@ -70,6 +70,18 @@
     </div>
     @{var model = Model.FirstOrDefault(); }
 
+    <br />
+    <br />
+
+    <form asp-action="Search" class="text-center text-sm-left">
+        <a class="nav justify-content-center">
+
+            <input name="searchId" placeholder="search.." />
+            <input type="submit" value="Search" class="btn btn-primary detailbtncolor " />
+        </a>
+    </form>
+
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-2">
