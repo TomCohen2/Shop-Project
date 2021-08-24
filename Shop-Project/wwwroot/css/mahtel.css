@@ -7,6 +7,9 @@
 .marginLeft10{
     margin-left:10px;
 }
+.marginRight10 {
+    margin-right: 10px;
+}
 .mainNavbg {
     background-image: url(images/redHbgjpg.jpg);
     background-size: cover;
@@ -76,7 +79,7 @@
     .list-group-item:first-child {
     border-top-left-radius: 0rem;
     border-top-right-radius: 0rem;
-    background-image: url(../images/1285953.jpg);
+    background-image: url(../images/cardsBG/cardsbg4.jpg);
     background-size: cover;
 }
 .list-group-item:last-child {
@@ -89,7 +92,7 @@
 #gameList .card {
     transition: transform .5s;
     position: relative;
-    background-image: url(../images/shayred.jpg);
+    background-image: url(../images/cardsBG/cardsbg2.jpg);
     background-size: cover;
 }
 
@@ -97,7 +100,7 @@
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1.25rem;
-    color:white;
+    color:black;
 }
 
 
@@ -121,15 +124,16 @@
     background-position: center;
 }
 .detailbtncolor {
-    border-color: #B7D153;
-    background-color: #90ac0a;
+    border-color: #306582;
+    background-color: none;
+    color: white;
     display: block;
     left: 50%;
 }
 
     .detailbtncolor:hover {
-        border-color: #90ac0a;
-        background-color: #B7D153;
+        border-color: #306582;
+        background-color: aqua;
         color: #000000;
     }
     .center{

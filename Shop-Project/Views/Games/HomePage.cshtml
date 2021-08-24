@@ -73,20 +73,20 @@
     <br />
     <br />
 
-    <form asp-action="Search" class="text-center text-sm-left">
+    <form asp-action="Search" class="text-center text-sm-left ">
         <a class="nav justify-content-center">
 
             <input name="searchId" placeholder="search.." />
-            <input type="submit" value="Search" class="btn btn-primary detailbtncolor " />
+            <input type="submit" value="Search" class="btn btn-dark detailbtncolor marginLeft10" />
         </a>
     </form>
 
 
-    <div class="container-fluid">
+    <div class="container-fluid allover">
         <div class="row">
             <div class="col-lg-2">
                 <form asp-action="HomePage">
-                    <h3 class=" text-white">Product Filter</h3>
+                    <h3 class=" text-dark">Product Filter</h3>
                     <ul class="list-group">
                         <li class="list-group-item">
                             <div class="custom-control custom-checkbox mb-3">
@@ -131,7 +131,7 @@
                                 </div>
                             </li>
                         </ul>}
-                    <input type="submit" value="Filter" class="btn btn-primary detailbtncolor" />
+                    <input type="submit" value="Filter" class="btn btn-dark detailbtncolor1" />
                 </form>
             </div>
             <div class="col-lg-9">
@@ -154,7 +154,7 @@
                                                 <p class="card-text textsize10"><b>@Html.DisplayFor(modelItem => item.Console.Name) ONLY!</b> </p>
                                                 <br />
                                                 <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
-                                                <a class="btn btn-primary detailbtncolor" asp-controller="Games" asp-action="Details" asp-route-id="@item.Id">More Details</a>
+                                                <a class="btn btn-dark detailbtncolor1" asp-controller="Games" asp-action="Details" asp-route-id="@item.Id">More Details</a>
                                             </div>
                                         </div>
                                     </div>
@@ -177,7 +177,7 @@
                                                 <br />
                                                 <br />
                                                 <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
-                                                <a class="btn btn-primary detailbtncolor" asp-controller="ConsoleVersions" asp-action="Details" asp-route-id="@item.Id">More Details</a>
+                                                <a class="btn btn-dark detailbtncolor1" asp-controller="ConsoleVersions" asp-action="Details" asp-route-id="@item.Id">More Details</a>
                                             </div>
                                         </div>
                                     </div>}
