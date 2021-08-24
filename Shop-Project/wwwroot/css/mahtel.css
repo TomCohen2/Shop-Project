@@ -59,9 +59,9 @@
     }
 
 .tabsbg {
-    background-image: url(../images/GEdenbg/GEden13.jpg);
+    background-image: url(../images/bluesBG/bluetowhite.jpg);
     background-size: cover;
-    background-position: center;
+    background-position:bottom;
 }
 .navbg .dropdown {
     width: 100%;
