@@ -4,10 +4,10 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="text-white">
+<div class="text-dark">
     <h4>Console</h4>
     <hr />
-    <dl class="row text-white">
+    <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -16,7 +16,7 @@
         </dd>
     </dl>
 </div>
-<div class="text-white">
+<div class="text-dark">
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

@@ -76,11 +76,12 @@
 }
 
 
-    .list-group-item:first-child {
+.list-group-item:first-child {
     border-top-left-radius: 0rem;
     border-top-right-radius: 0rem;
     background-image: url(../images/cardsBG/cardsbg4.jpg);
     background-size: cover;
+    width:150px;
 }
 .list-group-item:last-child {
 
@@ -125,10 +126,22 @@
 }
 .detailbtncolor {
     border-color: #306582;
-    background-color: none;
-    color: white;
+    background-color: black;
+    color: aqua;
     display: block;
     left: 50%;
+}
+.dbtnc {
+    border-color: #306582;
+    background-color: none;
+    color: aqua;
+    display: block;
+    left: 50%;
+}
+.dbtnc:hover {
+    border-color: #306582;
+    background-color: aqua;
+    color: #000000;
 }
 
     .detailbtncolor:hover {
