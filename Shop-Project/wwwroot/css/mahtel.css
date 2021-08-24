@@ -70,7 +70,7 @@
     width: 100%;
 }
     .dropbg {
-    background-image: url(../images/vrskelatone.jpeg);
+    background-image: url(../images/cardsBG/cardsbg6.jpg);
     background-size: cover;
     background-position: left;
 }
@@ -110,7 +110,7 @@
 }
 
 .navcolor2{
-    color: white;
+    color: #0c191b;
     padding-left:0;
 }
 .artbg1 {
