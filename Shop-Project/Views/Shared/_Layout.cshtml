@@ -12,15 +12,16 @@
     <header>
         <nav class="navbar navbar-expand-lg mainNavbg">
             <div class="container">
-                <a class="navbar-brand text-light" href="#">Gaming Shop Project</a>
+                <a class="navbar-brand text-light" href="/">Gaming Shop Project</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active text-light" aria-current="page" asp-action="Index" asp-controller="Home">Home</a></li>
-                        <li class="nav-item"><a class="nav-link text-light" asp-action="Privacy" asp-controller="Home">Privacy</a></li>
+                        <li class="nav-item"><a class="nav-link text-light" asp-controller="Games" asp-action="Index" >Games</a></li>                      
+                        @if (Context.User != null && Context.User.Claims != null && Context.User.Claims.Count() > 0)
+                        {
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-light" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">My Account</a>
+                            <a class="nav-link dropdown-toggle text-light text-sm-left" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">My Account</a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">My Orders</a></li>
                                 <li><a class="dropdown-item" href="#">Shopping Cart</a></li>
@@ -37,13 +38,6 @@
                         {
                             <li class="nav-item"><a class="nav-link active" aria-current="page" asp-action="Login" asp-controller="Users">Login</a></li>
                         }
-                        <li class="nav-item"><a class="nav-link btn-info text-light " asp-controller="Games" asp-action="Index">Edit Products</a></li>
-                        <!-- Nav -->
-                    
-                        <div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart">Cart (<span class="total-count"></span>)</button><button class="clear-cart btn btn-danger">Clear Cart</button>
-                        </div>
-                        
                     </ul>
                 </div>
             </div>
@@ -53,7 +47,7 @@
         @await Component.InvokeAsync("Menu")
 
     </header>
-    <div class="container" >
+    <div class="container " >
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

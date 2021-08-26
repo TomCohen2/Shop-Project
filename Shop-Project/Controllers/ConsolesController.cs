@@ -28,6 +28,11 @@ namespace Shop_Project.Controllers
             return View(await _context.Console.ToListAsync());
         }
 
+        public async Task<IActionResult> Cart()
+        {
+            return View(await _context.Console.ToListAsync());
+        }
+
         // GET: Consoles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
