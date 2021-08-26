@@ -4,11 +4,22 @@
     background-size: cover;
     background-position: center;
 }
+.nav-item::marker{
+    
+}
+.artbg2 {
+    background-image: url(../images/pexels-cottonbro-8059120.jpg);
+    background-size: cover;
+    background-position: center;
+}
 .marginLeft10{
     margin-left:10px;
 }
+.marginRight10 {
+    margin-right: 10px;
+}
 .mainNavbg {
-    background-image: url(images/redHbgjpg.jpg);
+    background-image: url(../images/whiteBg.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -19,10 +30,9 @@
     background-position: center;
 }
 .mainNavbgclear {
-    background-color:none;
+    background-color: none;
     background-size: cover;
     background-position: center;
-    
 }
 
 .navbg {
@@ -58,22 +68,27 @@
         color: inherit;
     }
 
-
+.tabsbg {
+    background-image: url(../images/bluesBG/bluetowhite.jpg);
+    background-size: cover;
+    background-position:bottom;
+}
 .navbg .dropdown {
     width: 100%;
 }
     .dropbg {
-    background-image: url(../images/vrskelatone.jpeg);
+    background-image: url(../images/cardsBG/cardsbg6.jpg);
     background-size: cover;
     background-position: left;
 }
 
 
-    .list-group-item:first-child {
+.list-group-item:first-child {
     border-top-left-radius: 0rem;
     border-top-right-radius: 0rem;
-    background-image: url(../images/558571.png);
+    background-image: url(../images/cardsBG/cardsbg.jpg);
     background-size: cover;
+    width:150px;
 }
 .list-group-item:last-child {
 
@@ -85,7 +100,7 @@
 #gameList .card {
     transition: transform .5s;
     position: relative;
-    background-image: url(../images/shayred.jpg);
+    background-image: url(../images/cardsBG/cardsbg6.jpg);
     background-size: cover;
 }
 
@@ -93,7 +108,7 @@
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1.25rem;
-    color:white;
+    color:black;
 }
 
 
@@ -103,7 +118,7 @@
 }
 
 .navcolor2{
-    color: white;
+    color: #0c191b;
     padding-left:0;
 }
 .artbg1 {
@@ -117,15 +132,28 @@
     background-position: center;
 }
 .detailbtncolor {
-    border-color: #B7D153;
-    background-color: #90ac0a;
+    border-color: #306582;
+    background-color: #090d25;
+    color: aqua;
     display: block;
     left: 50%;
 }
+.dbtnc {
+    border-color: #306582;
+    background-color: #090d25;
+    color: aqua;
+    display: block;
+    left: 50%;
+}
+.dbtnc:hover {
+    border-color: #306582;
+    background-color: aqua;
+    color: #000000;
+}
 
     .detailbtncolor:hover {
-        border-color: #90ac0a;
-        background-color: #B7D153;
+        border-color: #306582;
+        background-color: aqua;
         color: #000000;
     }
     .center{
@@ -133,7 +161,8 @@
     }
 .detailbtncolor1 {
     border-color: #306582;
-    background-color: #8eaa87;
+    background-color: #090d25;
+    color: aqua;
     display: block;
     width: 200px;
     left: 50%;
@@ -143,7 +172,23 @@
 
     .detailbtncolor1:hover {
         border-color: #306582;
-        background-color: #34f603;
+        background-color: aqua;
+        color: #000000;
+    }
+.bottonmain {
+    border-color: #306582;
+    background-color: none;
+    color: aqua;
+    display: block;
+    width: 200px;
+    left: 50%;
+    margin: auto;
+    /*left: 50%;*/
+}
+
+    .bottonmain:hover {
+        border-color: #306582;
+        background-color: aqua;
         color: #000000;
     }
 /* Set the size of the div element that contains the map */

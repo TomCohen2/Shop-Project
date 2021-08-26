@@ -13,7 +13,7 @@
             <div class="col-lg-2">
                 <form asp-action="GamePage">
                     <input name="id" value="@id2" hidden />
-                    <h3 class=" text-white">Genre Filter</h3>
+                    <h3 class=" text-dark">Filter</h3>
                     @foreach (var genre in model.Genres)
                     {
                         <ul class="list-group">
@@ -26,7 +26,7 @@
                                 </div>
                             </li>
                         </ul>}
-                    <input type="submit" value="Filter" class="btn btn-primary detailbtncolor px-5" />
+                    <input type="submit" value="Filter" class="btn btn-dark dbtnc px-5" />
                 </form>
             </div>
             <div class="col-lg-9">
@@ -50,7 +50,7 @@
                                             <p class="card-text textsize10"><b>@Html.DisplayFor(modelItem => item.Console.Name) ONLY!</b> </p>
                                             <br />
                                             <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
-                                            <a class="btn btn-primary detailbtncolor" asp-controller="Games" asp-action="Details" asp-route-id="@item.Id">More Details</a>
+                                            <a class="btn btn-dark dbtnc" asp-controller="Games" asp-action="Details" asp-route-id="@item.Id">More Details</a>
                                         </div>
                                     </div>
                                 </div>
