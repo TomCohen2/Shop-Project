@@ -347,7 +347,7 @@ namespace Shop_Project.Controllers
 
         public IActionResult Search(String searchId)
         {
-            if (searchId != null)
+            if (searchId!=null)
             {
                 String name = searchId;
                 List<Game> games = new List<Game>();
@@ -424,8 +424,5 @@ namespace Shop_Project.Controllers
             }
 
         }
-
-
-
     }
 }
