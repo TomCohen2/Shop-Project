@@ -13,7 +13,7 @@
             <div class="col-lg-2">
                 <form asp-action="GamePage">
                     <input name="id" value="@id2" hidden />
-                    <h3 class=" text-white">Genre Filter</h3>
+                    <h3 class=" text-dark">Filter</h3>
                     @foreach (var genre in model.Genres)
                     {
                         <ul class="list-group">
@@ -26,7 +26,7 @@
                                 </div>
                             </li>
                         </ul>}
-                    <input type="submit" value="Filter" class="btn btn-primary detailbtncolor px-5" />
+                    <input type="submit" value="Filter" class="btn btn-dark dbtnc px-5" />
                 </form>
             </div>
             <div class="col-lg-9">
@@ -39,22 +39,21 @@
 
                                 foreach (var item in model.Games)
                                 {
-                                    <div class="col-3 p-1">
-                                        <div class="card">
+                                <div class="col-3 p-1">
+                                    <div class="card">
 
-                                            <a href="@Url.Action("Details", "Games", new { id = item.Id })">
-                                                <img class="btn card-img-top" style="height:220px" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image">
-                                            </a>
-                                            <div class="card-body">
-                                                <h4 class="card-title textsize14">@Html.DisplayFor(modelItem => item.Name)</h4>
-                                                <p class="card-text textsize10"><b>@Html.DisplayFor(modelItem => item.Console.Name) ONLY!</b> </p>
-                                                <br />
-                                                <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
-                                                <a class="btn btn-primary detailbtncolor" asp-controller="Games" asp-action="Details" asp-route-id="@item.Id">More Details</a>
-                                                <a href="#" data-name="@item.Name" data-price="@item.Price" class="add-to-cart detailbtncolor btn btn-primary">Add to cart</a>
-                                            </div>
+                                        <a href="@Url.Action("Details", "Games", new { id = item.Id })">
+                                            <img class="btn card-img-top" style="height:220px" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image">
+                                        </a>
+                                        <div class="card-body">
+                                            <h4 class="card-title textsize14">@Html.DisplayFor(modelItem => item.Name)</h4>
+                                            <p class="card-text textsize10"><b>@Html.DisplayFor(modelItem => item.Console.Name) ONLY!</b> </p>
+                                            <br />
+                                            <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
+                                            <a class="btn btn-dark dbtnc" asp-controller="Games" asp-action="Details" asp-route-id="@item.Id">More Details</a>
                                         </div>
                                     </div>
+                                </div>
                                 }
                             }
                         </div>
@@ -63,33 +62,6 @@
             </div>
         </div>
     </div>
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="show-cart table">
-                    </table>
-                    <div>Total price: $<span class="total-cart"></span></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Order now</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
 </body>
 
 <style>
