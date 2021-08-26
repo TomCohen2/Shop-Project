@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ namespace Shop_Project.Controllers
         }
 
         // GET: Games
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var shop_ProjectContext = _context.Game.Include(g => g.Console).Include(g => g.Genres);
@@ -345,5 +347,84 @@ namespace Shop_Project.Controllers
         }
 
 
+        public IActionResult Search(String searchId)
+        {
+            if (searchId!=null)
+            {
+                String name = searchId;
+                List<Game> games = new List<Game>();
+                foreach (var g in _context.Game.Include(g => g.Console).Include(g => g.Genres))
+                {
+                    if (g.Name.Contains(name) || g.Name.Contains(name.ToLower()) || g.Name.Contains(name.ToUpper()))
+                        games.Add(g);
+                }
+
+                List<Models.ConsoleVersion> consoles = new List<Models.ConsoleVersion>();
+                foreach (Models.ConsoleVersion c in _context.ConsoleVersion)
+                {
+                    if (c.Name.Contains(name) || c.Name.Contains(name.ToLower()) || c.Name.Contains(name.ToUpper()))
+                        consoles.Add(c);
+                }
+
+                List<Genre> genres = new List<Genre>();
+                foreach (Genre g in _context.Genre)
+                {
+                    genres.Add(g);
+                }
+
+                List<Models.Console> consolesName = new List<Models.Console>();
+                foreach (Models.Console c in _context.Console)
+                {
+                    consolesName.Add(c);
+                }
+                ProductConsole productConsole = new ProductConsole();
+                productConsole.ConsolesName = consolesName;
+                productConsole.Genres = genres;
+                productConsole.Consoles = consoles;
+                productConsole.Games = games;
+
+                IEnumerable<ProductConsole> r = from a in _context.Game
+                                                select new ProductConsole
+                                                {
+                                                    Consoles = productConsole.Consoles,
+                                                    ConsolesName = productConsole.ConsolesName,
+                                                    Games = productConsole.Games,
+                                                    Genres = productConsole.Genres
+                                                };
+
+                return View("HomePage", r);
+            }
+            else
+            {
+                List<Genre> genres = new List<Genre>();
+                foreach (Genre g in _context.Genre)
+                {
+                    genres.Add(g);
+                }
+
+                List<Models.Console> consolesName = new List<Models.Console>();
+                foreach (Models.Console c in _context.Console)
+                {
+                    consolesName.Add(c);
+                }
+                ProductConsole productConsole = new ProductConsole();
+                productConsole.ConsolesName = consolesName;
+                productConsole.Genres = genres;
+                productConsole.Consoles = new List<ConsoleVersion>();
+                productConsole.Games = new List<Game>();
+
+                IEnumerable<ProductConsole> r = from a in _context.Game
+                                                select new ProductConsole
+                                                {
+                                                    Consoles = productConsole.Consoles,
+                                                    ConsolesName = productConsole.ConsolesName,
+                                                    Games = productConsole.Games,
+                                                    Genres = productConsole.Genres
+                                                };
+
+                return View("HomePage", r);
+            }
+
+        }
     }
 }
