@@ -4,6 +4,14 @@
     background-size: cover;
     background-position: center;
 }
+.nav-item::marker{
+    
+}
+.artbg2 {
+    background-image: url(../images/pexels-cottonbro-8059120.jpg);
+    background-size: cover;
+    background-position: center;
+}
 .marginLeft10{
     margin-left:10px;
 }
@@ -11,7 +19,7 @@
     margin-right: 10px;
 }
 .mainNavbg {
-    background-image: url(images/redHbgjpg.jpg);
+    background-image: url(../images/whiteBg.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -22,10 +30,9 @@
     background-position: center;
 }
 .mainNavbgclear {
-    background-color:none;
+    background-color: none;
     background-size: cover;
     background-position: center;
-    
 }
 
 .navbg {
@@ -79,7 +86,7 @@
 .list-group-item:first-child {
     border-top-left-radius: 0rem;
     border-top-right-radius: 0rem;
-    background-image: url(../images/cardsBG/cardsbg4.jpg);
+    background-image: url(../images/cardsBG/cardsbg.jpg);
     background-size: cover;
     width:150px;
 }
@@ -93,7 +100,7 @@
 #gameList .card {
     transition: transform .5s;
     position: relative;
-    background-image: url(../images/cardsBG/cardsbg2.jpg);
+    background-image: url(../images/cardsBG/cardsbg6.jpg);
     background-size: cover;
 }
 
@@ -126,14 +133,14 @@
 }
 .detailbtncolor {
     border-color: #306582;
-    background-color: black;
+    background-color: #090d25;
     color: aqua;
     display: block;
     left: 50%;
 }
 .dbtnc {
     border-color: #306582;
-    background-color: none;
+    background-color: #090d25;
     color: aqua;
     display: block;
     left: 50%;
@@ -154,8 +161,8 @@
     }
 .detailbtncolor1 {
     border-color: #306582;
-    background-color: none;
-    color:aqua;
+    background-color: #090d25;
+    color: aqua;
     display: block;
     width: 200px;
     left: 50%;
@@ -164,6 +171,22 @@
 }
 
     .detailbtncolor1:hover {
+        border-color: #306582;
+        background-color: aqua;
+        color: #000000;
+    }
+.bottonmain {
+    border-color: #306582;
+    background-color: none;
+    color: aqua;
+    display: block;
+    width: 200px;
+    left: 50%;
+    margin: auto;
+    /*left: 50%;*/
+}
+
+    .bottonmain:hover {
         border-color: #306582;
         background-color: aqua;
         color: #000000;

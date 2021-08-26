@@ -12,7 +12,7 @@
     <header >
         <nav class="navbar navbar-expand-lg mainNavbgclear">
             <div class="container marginLeft10">
-                <img class="navbar-brand text-dark" width="100" src="~/images/logos/GElogo.JPG" ></img>
+                <a href="Home/Index"><img class="navbar-brand text-dark" width="60" src="~/images/logos/logonobg.png"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -29,16 +29,17 @@
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
-                        @if (Context.User != null && Context.User.Claims != null && Context.User.Claims.Count() > 0)
-                        {
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" asp-action="Logout" asp-controller="Users">Logout @User.Identity.Name </a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" asp-controller="Games" asp-action="Index">Games</a></li>
+                        </ul>
+                        <ul class="collapse navbar-collapse justify-content-end list-unstyled" style="margin-bottom:0">
+                            @if (Context.User != null && Context.User.Claims != null && Context.User.Claims.Count() > 0)
+                            {<li class="nav-item justify-content-lg-end"><a class="nav-link active" aria-current="page" asp-action="Logout" asp-controller="Users">Logout @User.Identity.Name </a></li>
                         }
                         else
                         {
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" asp-action="Login" asp-controller="Users">Login</a></li>
+                            <li class="nav-item justify-content-lg-end"><a class="nav-link active" aria-current="page" asp-action="Login" asp-controller="Users">Login</a></li>
                         }
-                        <li class="nav-item"><a class="nav-link text-dark" asp-controller="Games" asp-action="Index" >Games</a></li>                      
-                    </ul>
+                        </ul>                   
                 </div>
             </div>
         </nav>
