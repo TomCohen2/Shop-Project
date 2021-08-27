@@ -39,25 +39,51 @@
 
                                 foreach (var item in model.Games)
                                 {
-                                <div class="col-3 p-1">
-                                    <div class="card">
+                                    <div class="col-3 p-1">
+                                        <div class="card">
 
-                                        <a href="@Url.Action("Details", "Games", new { id = item.Id })">
-                                            <img class="btn card-img-top" style="height:220px" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image">
-                                        </a>
-                                        <div class="card-body">
-                                            <h4 class="card-title textsize14">@Html.DisplayFor(modelItem => item.Name)</h4>
-                                            <p class="card-text textsize10"><b>@Html.DisplayFor(modelItem => item.Console.Name) ONLY!</b> </p>
-                                            <br />
-                                            <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
-                                            <a class="btn btn-dark dbtnc" asp-controller="Games" asp-action="Details" asp-route-id="@item.Id">More Details</a>
+                                            <a href="@Url.Action("Details", "Games", new { id = item.Id })">
+                                                <img class="btn card-img-top" style="height:220px" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image">
+                                            </a>
+                                            <div class="card-body">
+                                                <h4 class="card-title textsize14">@Html.DisplayFor(modelItem => item.Name)</h4>
+                                                <p class="card-text textsize10"><b>@Html.DisplayFor(modelItem => item.Console.Name) ONLY!</b> </p>
+                                                <br />
+                                                <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
+                                                <a class="btn btn-dark dbtnc" asp-controller="Games" asp-action="Details" asp-route-id="@item.Id">More Details</a>
+                                                <a href="#" data-name="@item.Name" data-price="@item.Price" class="add-to-cart btn btn-dark dbtnc">Add to cart</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 }
                             }
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="show-cart table">
+                    </table>
+                    <div>Total price: $<span class="total-cart"></span></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="clear-cart btn btn-danger">Clear Cart</button>
+                    <button type="button" class="btn btn-primary">Order now</button>
                 </div>
             </div>
         </div>
