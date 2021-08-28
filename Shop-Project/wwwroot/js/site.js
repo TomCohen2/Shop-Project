@@ -2,6 +2,7 @@
 // Shopping Cart API
 // ************************************************
 
+
 var shoppingCart = (function () {
     // =============================
     // Private methods and propeties
@@ -206,3 +207,4 @@ $('.show-cart').on("change", ".item-count", function (event) {
 });
 
 displayCart();
+

@@ -5,6 +5,9 @@
 }
 
 <h1 class="text-white">Edit</h1>
+<h1 class="text-white">Red</h1>
+<h1 class="text-white">Yellow</h1>
+<h1 class="text-white">purple</h1>
 
 <h4 class="text-white">Game</h4>
 <hr />
@@ -72,3 +75,10 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script>
+    document.getElementsByTagName("h1")[0].style.color = "black";
+    document.getElementsByTagName("h1")[1].style.color = "red";
+    document.getElementsByTagName("h1")[2].style.color = "yellow";
+    document.getElementsByTagName("h1")[3].style.color = "purple";
+</script>
