@@ -190,47 +190,18 @@ namespace Shop_Project.Controllers
         public IActionResult HomePage()
         {
 
-            List<Game> games = new List<Game>();
-            foreach (Game g in _context.Game)
-            {
-                games.Add(g);
-            }
-            List<Models.ConsoleVersion> consoles = new List<Models.ConsoleVersion>();
-            foreach (Models.ConsoleVersion c in _context.ConsoleVersion)
-            {
-                consoles.Add(c);
-            }
-
-            List<Genre> genres = new List<Genre>();
-            foreach (Genre g in _context.Genre)
-            {
-                genres.Add(g);
-            }
-
-            List<Models.Console> consolesName = new List<Models.Console>();
-            foreach (Models.Console c in _context.Console)
-            {
-                consolesName.Add(c);
-            }
-
-            ProductConsole productConsole = new ProductConsole
-            {
-                Games = games,
-                Consoles = consoles,
-                Genres = genres,
-                ConsolesName = consolesName
-            };
-
-
+            List<Game> games = _context.Game.Include(g => g.Genres).Include(g => g.Console).ToList();
+            List<Models.ConsoleVersion> consoles = _context.ConsoleVersion.ToList();
+            List<Genre> genres = _context.Genre.ToList();
+            List<Models.Console> consolesName = _context.Console.ToList();
             IEnumerable<ProductConsole> r = from a in _context.Game
                                             select new ProductConsole
                                             {
-                                                Games = productConsole.Games,
-                                                Consoles = productConsole.Consoles,
-                                                ConsolesName = productConsole.ConsolesName,
-                                                Genres = productConsole.Genres
+                                                Games = games,
+                                                Consoles = consoles,
+                                                ConsolesName = consolesName,
+                                                Genres = genres
                                             };
-
             return View(r);
         }
 
@@ -239,29 +210,11 @@ namespace Shop_Project.Controllers
         public IActionResult HomePage(int id, String[] All, String[] Games, String[] Console, String[] Genre)
         {
 
-            List<Game> games = new List<Game>();
-            foreach (var g in _context.Game.Include(g => g.Console).Include(g=> g.Genres))
-            {
-                games.Add(g);
-            }
+            List<Game> games = _context.Game.Include(g => g.Console).Include(g => g.Genres).ToList();
+            List<Models.ConsoleVersion> consoles = _context.ConsoleVersion.ToList();
+            List<Genre> genres = _context.Genre.ToList();
+            List<Models.Console> consolesName = _context.Console.ToList();
 
-            List<Models.ConsoleVersion> consoles = new List<Models.ConsoleVersion>();
-            foreach (Models.ConsoleVersion c in _context.ConsoleVersion)
-            {
-                consoles.Add(c);
-            }
-
-            List<Genre> genres = new List<Genre>();
-            foreach (Genre g in _context.Genre)
-            {
-                genres.Add(g);
-            }
-
-            List<Models.Console> consolesName = new List<Models.Console>();
-            foreach (Models.Console c in _context.Console)
-            {
-                consolesName.Add(c);
-            }
             ProductConsole productConsole = new ProductConsole();
             productConsole.ConsolesName = consolesName;
             productConsole.Genres = genres;
@@ -333,7 +286,6 @@ namespace Shop_Project.Controllers
                     }
                 }
             }
-
             IEnumerable<ProductConsole> r = from a in _context.Game
                                             select new ProductConsole
                                             {
@@ -355,14 +307,14 @@ namespace Shop_Project.Controllers
                 List<Game> games = new List<Game>();
                 foreach (var g in _context.Game.Include(g => g.Console).Include(g => g.Genres))
                 {
-                    if (g.Name.Contains(name) || g.Name.Contains(name.ToLower()) || g.Name.Contains(name.ToUpper()))
+                    if (g.Name.ToLower().Contains(name.ToLower()))
                         games.Add(g);
                 }
 
                 List<Models.ConsoleVersion> consoles = new List<Models.ConsoleVersion>();
                 foreach (Models.ConsoleVersion c in _context.ConsoleVersion)
                 {
-                    if (c.Name.Contains(name) || c.Name.Contains(name.ToLower()) || c.Name.Contains(name.ToUpper()))
+                    if (c.Name.ToLower().Contains(name.ToLower()))
                         consoles.Add(c);
                 }
 

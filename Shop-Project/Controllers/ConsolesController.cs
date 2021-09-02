@@ -78,6 +78,7 @@ namespace Shop_Project.Controllers
         }
         public async Task<IActionResult> ConsoleVersionPage(int? id)
         {
+            var rr = id;
             IEnumerable<GroupGameConsole> sorted =
                               from a in _context.ConsoleVersion
                               where (a.ConsoleId == id)
@@ -95,6 +96,7 @@ namespace Shop_Project.Controllers
                                   Name = k.Key.Name,
                                   Price = k.Key.Price,
                                   Image = k.Key.Image,
+                                  ConsoleId = rr.GetValueOrDefault()
                               };
 
             return View(sorted.ToList());
@@ -131,11 +133,7 @@ namespace Shop_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> GamePage(int id, String[] Genre)
         {
-            List<Genre> g = new List<Genre>();
-            for (int i = 0; i < _context.Genre.Count(); i++)
-            {
-                g.Add(_context.Genre.Where(a => a.Id.Equals(i + 1)).FirstOrDefault());
-            }
+            List<Genre> g = _context.Genre.ToList();
             var genre2 = _context.Genre.Where(a => a.Name.Contains("Accessories")).FirstOrDefault();
             g.Remove(genre2);
             var console = from a in _context.Console
@@ -143,8 +141,7 @@ namespace Shop_Project.Controllers
                           select a.Name;
             String con = console.FirstOrDefault();
 
-            List<Game> g2 = new List<Game>();
-            g2.AddRange(_context.Game.Where(a => a.Console.Name.Contains(con)).Include(g => g.Console).Include(g => g.Genres));
+            List<Game> g2 = _context.Game.Include(g => g.Console).Include(g => g.Genres).Where(a => a.Console.Name.Contains(con) && !a.Genres.Contains(genre2)).ToList();
             List<Game> g3 = new List<Game>();
             if (Genre.Count() > 0)
             {
@@ -179,16 +176,25 @@ namespace Shop_Project.Controllers
                 }
             }
 
+            if (Genre.Count().Equals(0))
+            {
+
+                IEnumerable<GroupGameGenre> rr = from a in _context.Game
+                                                 select new GroupGameGenre
+                                                 {
+                                                     Genres = g,
+                                                     ConsoleId = id,
+                                                     Games = g2
+                                                 };
+            return View("GamePage", rr);
+            }
             IEnumerable<GroupGameGenre> r2 = from a in _context.Game
                                              select new GroupGameGenre
                                              {
                                                  Genres = g,
                                                  ConsoleId = id,
-                                                 Games = new List<Game>()
                                              };
-
             return View("GamePage", r2);
-
         }
 
 
@@ -197,8 +203,6 @@ namespace Shop_Project.Controllers
             Genre g = _context.Genre.Where(a => a.Name.Equals("Accessories")).FirstOrDefault();
             List<Game> games = new List<Game>();
             games.Add(_context.Game.Where(a => a.Genres.Contains(g)).FirstOrDefault());
-
-
             return View(games);
 
         }
@@ -313,5 +317,90 @@ namespace Shop_Project.Controllers
         {
             return _context.Console.Any(e => e.Id == id);
         }
+
+
+
+
+        public IActionResult AccessorySearch(String searchId)
+        {
+            List<Game> games = new List<Game>();
+            var g = from a in _context.Genre
+                        where (a.Name.Equals("Accessories"))
+                        select a;
+            Genre genre = g.FirstOrDefault();
+            if (searchId != null)
+            {
+                games.Add(_context.Game.Where(a => a.Genres.Contains(genre)).FirstOrDefault());
+                return View("AccessoryPage", games.Where(a=> a.Name.ToLower().Contains(searchId.ToLower())).AsEnumerable());
+            }
+            else
+            {
+                games.Add(_context.Game.Where(a => a.Genres.Contains(genre)).FirstOrDefault());
+                return View("AccessoryPage", games.AsEnumerable());
+            }
+        }
+
+
+        public IActionResult ConsoleSearch(int id, String searchId)
+        {
+            IEnumerable<GroupGameConsole> sorted = from a in _context.ConsoleVersion
+                                                   where (a.ConsoleId == id)
+                                                   group a by new
+                                                   {
+                                                       a.Id,
+                                                       a.Name,
+                                                       a.Price,
+                                                       a.Image,
+
+                                                   } into k
+                                                   select new GroupGameConsole
+                                                   {
+                                                       Id = k.Key.Id,
+                                                       Name = k.Key.Name,
+                                                       Price = k.Key.Price,
+                                                       Image = k.Key.Image,
+                                                       ConsoleId = id
+                                                   };
+            if (searchId != null)
+            {
+                IEnumerable<GroupGameConsole> sorted2 = sorted.Where(a => a.Name.ToLower().Contains(searchId.ToLower()));
+                if(sorted2.FirstOrDefault() != null)
+                    return View("ConsoleVersionPage", sorted.Where(a => a.Name.ToLower().Contains(searchId.ToLower())).ToList());
+                GroupGameConsole r = new GroupGameConsole
+                {
+                    ConsoleId = id
+                };
+                List<GroupGameConsole> rr = new List<GroupGameConsole>();
+                rr.Add(r);
+                return View("ConsoleVersionPage", rr.AsEnumerable().ToList());
+            }
+            else
+            {
+                return View("ConsoleVersionPage", sorted.ToList());
+            }
+        }
+
+
+        public IActionResult GameSearch(int id, String searchId)
+        {
+            var g = _context.Genre.Where(a => a.Name.Equals("Accessories")).FirstOrDefault();
+            List<Genre> genres = _context.Genre.ToList();
+            genres.Remove(g);
+            List<Game> games = _context.Game.Where(a => a.Console.Id.Equals(id) && !a.Genres.Contains(g)).Include(g=> g.Console).ToList();
+            if(searchId != null)
+            {
+                games = games.Where(a => a.Name.ToLower().Contains(searchId.ToLower())).ToList();
+            }
+            IEnumerable<GroupGameGenre> r = from a in _context.Game
+                                            select new GroupGameGenre
+                                            {
+                                                ConsoleId = id,
+                                                Genres = genres,
+                                                Games = games
+                                            };
+            return View("GamePage", r);
+        }
+
+
     }
 }

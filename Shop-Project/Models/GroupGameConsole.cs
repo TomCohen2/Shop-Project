@@ -20,6 +20,8 @@ namespace Shop_Project.Models
         public float Price { get; set; }
         public List<Genre> Genres { get; set; }
 
+        public int ConsoleId { get; set; }
+
 
     }
 }

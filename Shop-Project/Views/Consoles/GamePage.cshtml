@@ -8,6 +8,15 @@
     var model = Model.FirstOrDefault();
     var id2 = model.ConsoleId;}
 <body>
+    <br />
+    <br />
+    <form asp-action="GameSearch" class="text-center text-sm-left ">
+        <a class="nav justify-content-center">
+            <input name="id" value="@id2" hidden />
+            <input name="searchId" placeholder="search.." />
+            <input type="submit" value="Search" class="btn btn-dark dbtnc marginLeft10" />
+        </a>
+    </form>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-2">
@@ -34,7 +43,7 @@
 
                     <div id="gameList" class="container mt-3">
                         <div class="row">
-                            @if (model.Games.Count() > 0)
+                            @if (model.Games != null)
                             {
 
                                 foreach (var item in model.Games)
