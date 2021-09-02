@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="~/css/mahtel.css" />
 </head>
 <body class="bgM">
-    <header >
+    <header>
         <nav class="navbar navbar-expand-lg mainNavbgclear">
             <div class="container marginLeft10">
                 <a href="Home/Index"><img class="navbar-brand text-dark" width="60" src="~/images/logos/logonobg.png"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active text-dark" aria-current="page" asp-action="Index" asp-controller="Home">Home</a></li>
@@ -31,7 +33,7 @@
                         </li>
                         <li class="nav-item"><a class="nav-link text-dark" asp-controller="Games" asp-action="Index">Games</a></li>
                         <li type="button" class="nav-link text-dark" data-toggle="modal" data-target="#cart">Cart (<span class="total-count"></span>)</></li>
-                        
+
                     </ul>
                     <ul class="collapse navbar-collapse justify-content-end list-unstyled" style="margin-bottom:0">
                         @if (Context.User != null && Context.User.Claims != null && Context.User.Claims.Count() > 0)
@@ -43,8 +45,8 @@
                             <li class="nav-item justify-content-lg-end"><a class="nav-link active" aria-current="page" asp-action="Login" asp-controller="Users">Login</a></li>
                         }
                     </ul>
-                          
-                    
+
+
                 </div>
             </div>
         </nav>
@@ -53,12 +55,35 @@
         @await Component.InvokeAsync("Menu")
 
     </header>
-    <div class="container " >
+    <div class="container ">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="show-cart table">
+                    </table>
+                    <div>Total price: $<span class="total-cart"></span></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="clear-cart btn btn-danger">Clear Cart</button>
+                    <button type="button" class="btn btn-primary">Order now</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -69,5 +94,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

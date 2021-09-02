@@ -150,6 +150,21 @@
     background-color: aqua;
     color: #000000;
 }
+.dbtnc1 {
+    width: 200px;
+    position: center;
+    border-color:#0c191b;
+    background-color: #af64a8;
+    color: aqua;
+    display: block;
+    left: 50%;
+}
+
+    .dbtnc1:hover {
+        border-color: #306582;
+        background-color: #090d25;
+        color: #af64a8;
+    }
 
     .detailbtncolor:hover {
         border-color: #306582;
@@ -221,3 +236,24 @@
    .img-container .textred{
         color:#b01014
     }
+.textsize14 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.textsize10 {
+    font-size: 10px;
+}
+
+.textsize12 {
+    font-size: 12px;
+}
+
+.mycontainer {
+    width: 100%;
+}
+
+.mycard {
+    background: none;
+    display: inline-block;
+}

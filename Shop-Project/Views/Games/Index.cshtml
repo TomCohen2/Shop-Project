@@ -8,11 +8,12 @@
     <h4 class="white">Games in stock</h4>
 </head>
 
-<p class="white">
-    <a class="btn btn-primary detailbtncolor" asp-action="Create">Create a new product</a>
+
+<p>
+    <a class="btn dbtnc1 " asp-action="Create">Create a new product</a>
 </p>
 <body>
-
+    
     @foreach (var item in Model)
     {
         <div class="card mycard" style="width:200px">

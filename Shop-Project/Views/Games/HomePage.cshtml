@@ -155,6 +155,7 @@
                                                 <br />
                                                 <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
                                                 <a class="btn btn-dark detailbtncolor1" asp-controller="Games" asp-action="Details" asp-route-id="@item.Id">More Details</a>
+                                                <a href="#" data-name="@item.Name" data-price="@item.Price" class="add-to-cart btn btn-dark detailbtncolor1">Add to cart</a>
                                             </div>
                                         </div>
                                     </div>
