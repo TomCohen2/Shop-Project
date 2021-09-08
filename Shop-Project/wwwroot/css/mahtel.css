@@ -153,17 +153,17 @@
 .dbtnc1 {
     width: 200px;
     position: center;
-    border-color:#0c191b;
-    background-color: #af64a8;
-    color: aqua;
+    border-color: #808080;
+    background-color: none;
+    color: #4800ff;
     display: block;
     left: 50%;
 }
 
     .dbtnc1:hover {
         border-color: #306582;
-        background-color: #090d25;
-        color: #af64a8;
+        background-color: #808080;
+        color: white;
     }
 
     .detailbtncolor:hover {

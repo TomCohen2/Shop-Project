@@ -51,8 +51,10 @@
             <iframe src="@Html.DisplayFor(model => model.trailer)" width="420" height="345"></iframe>
         </dd>
         <dd class="col-sm-12">
-            <b class="text-danger">Game for </b><b>@Html.DisplayFor(model => model.Console.Name) <b class="text-danger">ONLY</b>
-        </dd>
+            <b class="text-danger">Game for </b><b>
+    @Html.DisplayFor(model => model.Console.Name) <b class="text-danger">ONLY</b>
+            <a href="#" data-name="@Html.DisplayFor(model => model.Name)" data-price="@Html.DisplayFor(model => model.Price)" class="add-to-cart btn btn-dark dbtnc1 text-white">Add to cart</a>
+</dd>
     </dl>
 </div>
 <div class="text-primary">
