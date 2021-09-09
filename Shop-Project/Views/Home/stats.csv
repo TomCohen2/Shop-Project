@@ -1,0 +1,22 @@
+﻿"Console","Sales"
+"PS2",155
+"NINTENDO DSF",154
+"PS4",116
+"PS1",102
+"Wii",101
+"NINTENDO SWITCH",89
+"PS3",87
+"XBOX 360",84
+"XBOX ONE",51
+"XBOX",24
+"PS5",10
+"XBOX SERIES X/S",6
+
+    const revData = [
+        { id='d1', company ="Tecent", revenues ="7.182" },
+        { id='d2', company ="Sony", revenues ="5,679" },
+        { id='d3', company ="Microsoft", revenues ="3.473" },
+        { id='d4', company ="NetEase", revenues ="2.052" },
+        { id='d5', company ="", revenues ="2.607" },
+        { id='d6', company ="", revenues ="2.108" },
+        
