@@ -25,8 +25,18 @@ namespace Shop_Project.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
-            var shop_ProjectContext = _context.Game.Include(g => g.Console).Include(g => g.Genres);
-            return View(await shop_ProjectContext.ToListAsync());
+            List<Game> games = _context.Game.Include(g => g.Console).Include(g => g.Genres).ToList();
+            List<Models.ConsoleVersion> consoles = _context.ConsoleVersion.ToList();
+
+
+            IEnumerable<ProductConsole> r = from a in _context.Game
+                                            select new ProductConsole
+                                            {
+                                                Games = games,
+                                                Consoles = consoles
+                                            };
+
+            return View(r);
         }
 
 

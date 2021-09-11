@@ -1,11 +1,11 @@
-﻿@model IEnumerable<Shop_Project.Models.Game>
+﻿@model IEnumerable<Shop_Project.Models.ProductConsole>
 
 @{
     ViewData["Title"] = "Index";
 }
+@{ var model = Model.FirstOrDefault();}
 <head>
     <link rel="stylesheet" href="mahtel.css">
-    
 </head>
 
 
@@ -20,25 +20,48 @@
 
 <body>
     <h4 class="white">Games in stock</h4>
-    @foreach (var item in Model)
+    @if (model.Games != null)
     {
-        <div class="card mycard" style="width:200px">
+        @foreach (var item in model.Games)
+        {
+            <div class="card mycard" style="width:200px">
 
-            <a href="@Url.Action("Details","Games",new { id = item.Id })">
-                <img class="btn card-img-top" style="height:220px" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image">
-            </a>
-            <div class="card-body">
-                <h4 class="card-title textsize14">@Html.DisplayFor(modelItem => item.Name)</h4>
-                <p class="card-text textsize10"><b>@Html.DisplayFor(modelItem => item.Console.Name) ONLY!</b> </p>
-                <br />
-                <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
-                <a class="btn btn-primary btn-dark dbtnc" asp-action="Details" asp-route-id="@item.Id">More Details</a>
-                <a class="btn btn-primary btn-dark dbtnc" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a class="btn btn-primary btn-danger btn-dark dbtnc " asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a href="@Url.Action("Details", "Games", new { id = item.Id })">
+                    <img class="btn card-img-top" style="height:220px" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image">
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title textsize14">@Html.DisplayFor(modelItem => item.Name)</h4>
+                    <p class="card-text textsize10"><b>@Html.DisplayFor(modelItem => item.Console.Name) ONLY!</b> </p>
+                    <br />
+                    <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
+                    <a class="btn btn-primary btn-dark dbtnc" asp-action="Details" asp-route-id="@item.Id">More Details</a>
+                    <a class="btn btn-primary btn-dark dbtnc" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-primary btn-danger btn-dark dbtnc " asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </div>
             </div>
-        </div>
+        }
     }
+    @if (model.Games != null)
+    {
+        @foreach (var item in model.Consoles)
+        {
+            <div class="card mycard" style="width:200px">
 
+                <a href="@Url.Action("Details", "Consoles", new { id = item.Id })">
+                    <img class="btn card-img-top" style="height:220px" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image">
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title textsize14">@Html.DisplayFor(modelItem => item.Name)</h4>
+                    <p class="card-text textsize10"><b>@Html.DisplayFor(modelItem => item.Console.Name) ONLY!</b> </p>
+                    <br />
+                    <p class="card-text textsize12 text-center"><b>@Html.DisplayFor(modelItem => item.Price)</b></p>
+                    <a class="btn btn-primary btn-dark dbtnc" asp-controller="Consoles" asp-action="Details" asp-route-id="@item.Id">More Details</a>
+                    <a class="btn btn-primary btn-dark dbtnc" asp-controller="Consoles" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-primary btn-danger btn-dark dbtnc " asp-controller="Consoles" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </div>
+            </div>
+        }
+    }
 </body>
 <script src="~/js/index.js"></script>
 
