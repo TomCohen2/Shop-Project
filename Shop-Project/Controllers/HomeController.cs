@@ -31,7 +31,7 @@ namespace Shop_Project.Controllers
         }
 
 
-        [Authorize]
+        
         public IActionResult Privacy()
         {
             /* if (HttpContext.Session.GetString("username") == null) {
